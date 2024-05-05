@@ -176,7 +176,7 @@ public class LoginActivity extends AppCompatActivity {
     private boolean isFieldEmpty(String field, EditText editText) {
         if (field.isEmpty()) {
             editText.requestFocus();
-            editText.setError("FIELD CANNOT BE EMPTY");
+            editText.setError("Field cannot be empty");
             return true;
         }
         return false;

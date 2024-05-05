@@ -104,7 +104,7 @@ public class RegisterActivity extends AppCompatActivity {
     private boolean validationInfo(String fullName, String gardenName, String phoneNumber, String password) {
         if (isAlphabeticalString(fullName)) {
             fullNameET.requestFocus();
-            fullNameET.setError("ENTER ONLY ALPHABETICAL CHARACTERS");
+            fullNameET.setError("Enter only alphabetical characters ");
             return false;
         }
         if (isFieldEmpty(gardenName, gardenNameET)) {
@@ -115,12 +115,12 @@ public class RegisterActivity extends AppCompatActivity {
         }
         if (!isValidPhoneNumber(phoneNumber)) {
             phoneNumberET.requestFocus();
-            phoneNumberET.setError("ENTER A VALID PHONE NUMBER");
+            phoneNumberET.setError("Enter a valid phone number");
             return false;
         }
         if (isAlphabeticalString(gardenName)) {
             gardenNameET.requestFocus();
-            gardenNameET.setError("ENTER ONLY ALPHABETICAL CHARACTERS");
+            gardenNameET.setError("Enter only alphabetical characters");
             return false;
         }
         return isPasswordValid(password, passwordET);
