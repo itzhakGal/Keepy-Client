@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "423077486671",
+    "firebase_url": "https://keppy-5ed11-default-rtdb.firebaseio.com",
+    "project_id": "keppy-5ed11",
+    "storage_bucket": "keppy-5ed11.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:423077486671:android:8e5a33314f5e7def744a3a",
+        "android_client_info": {
+          "package_name": "com.example.keepy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcC20q1z62LOa3nnd4OdbTCtXHrZQSgOI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
