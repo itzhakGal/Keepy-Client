@@ -190,7 +190,7 @@ public class LoginActivity extends AppCompatActivity {
     private boolean isPasswordValid(String password, EditText editText) {
         if (password.length() < 5) {
             editText.requestFocus();
-            editText.setError("MINIMUM 5 CHARACTER REQUIRED");
+            editText.setError("Minimum 5 character required");
             return false;
         }
         return true;
