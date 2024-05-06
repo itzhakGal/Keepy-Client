@@ -38,7 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
         alreadyHaveAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RegisterActivity.this,MainActivity.class));
+                startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
             }
         });
 
@@ -67,10 +67,6 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
-
     }
 
     private boolean isAlphabeticalString(String str) {
@@ -81,7 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
     private boolean isFieldEmpty(String field, EditText editText) {
         if (field.isEmpty()) {
             editText.requestFocus();
-            editText.setError("FIELD CANNOT BE EMPTY");
+            editText.setError("Field cannot be empty");
             return true;
         }
         return false;
@@ -90,7 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
     private boolean isPasswordValid(String password, EditText editText) {
         if (password.length() < 5) {
             editText.requestFocus();
-            editText.setError("MINIMUM 5 CHARACTERS REQUIRED");
+            editText.setError("Minimum 5 character required");
             return false;
         }
         return true;
