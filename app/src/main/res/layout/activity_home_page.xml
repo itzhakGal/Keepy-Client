@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbarSize="25dp"
+    tools:context=".HomePageActivity"
+    android:background="@drawable/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.172"
+        tools:layout_editor_absoluteX="0dp">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#2D4E0B0B"
+            android:text="הגנים שלי: "
+            android:textAlignment="center"
+            android:textColor="@color/colorRegister"
+            android:textSize="36sp"
+            android:textStyle="bold|italic" />
+
+
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/custom_edittext"
+            android:padding="10sp"
+            android:textStyle="bold"
+            android:text="-אין גנים משוייכים" />
+
+        <TextView
+            android:id="@+id/textAddKindergarten"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="15sp"
+            android:text="+הוספת גן"
+            android:textColor="@color/colorRegister"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:ignore="RtlHardcoded" />
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

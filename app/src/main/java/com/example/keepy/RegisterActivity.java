@@ -16,9 +16,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText fullNameET, gardenNameET, phoneNumberET, passwordET;
+    EditText fullNameET, phoneNumberET;
     Button registerBtn;
-    TextView alreadyHaveAccountBtn;
     FirebaseDatabase database;
     DatabaseReference reference;
 
@@ -29,18 +28,9 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         fullNameET = findViewById(R.id.fullName);
-        gardenNameET = findViewById(R.id.gardenName);
         phoneNumberET = findViewById(R.id.registerPhoneNumber);
-        passwordET = findViewById(R.id.registerPassword);
         registerBtn = findViewById(R.id.registerButton);
-        alreadyHaveAccountBtn=findViewById(R.id.alreadyHaveAccount);
 
-        alreadyHaveAccountBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
-            }
-        });
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,17 +40,15 @@ public class RegisterActivity extends AppCompatActivity {
                 reference = database.getReference("users");
 
                 String fullName = fullNameET.getText().toString();
-                String gardenName = gardenNameET.getText().toString();
                 String phoneNumber = phoneNumberET.getText().toString();
-                String password = passwordET.getText().toString();
 
-                HelperClass helperClass = new HelperClass(fullName, gardenName, phoneNumber, password);
+                HelperClass helperClass = new HelperClass(fullName, phoneNumber);
                 reference.child(phoneNumber).setValue(helperClass);
 
-                boolean check = validationInfo(fullName, gardenName, phoneNumber, password);
+                boolean check = validationInfo(fullName, phoneNumber);
                 if(check) {
                     Toast.makeText(getApplicationContext(), "Data is valid", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                    startActivity(new Intent(RegisterActivity.this, HomePageActivity.class));
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "Sorry check information again", Toast.LENGTH_SHORT).show();
@@ -70,7 +58,17 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean isAlphabeticalString(String str) {
-        return !str.matches("[a-zA-Z\u0590-\u05FF\\s]+");
+        if (str.matches("[a-zA-Z\u0590-\u05FF\\s]+"))
+        {
+        return true;
+        }
+        else
+        {
+            fullNameET.requestFocus();
+            fullNameET.setError("Enter only alphabetical characters ");
+            return false;
+        }
+
     }
 
 
@@ -83,29 +81,16 @@ public class RegisterActivity extends AppCompatActivity {
         return false;
     }
 
-    private boolean isPasswordValid(String password, EditText editText) {
-        if (password.length() < 5) {
-            editText.requestFocus();
-            editText.setError("Minimum 5 character required");
-            return false;
-        }
-        return true;
-    }
-
     private boolean isValidPhoneNumber(String phoneNumber) {
         String regex = "^[0-9]{10}$"; // Assumes a 10-digit phone number
         return phoneNumber.matches(regex);
     }
 
-    private boolean validationInfo(String fullName, String gardenName, String phoneNumber, String password) {
-        if (isAlphabeticalString(fullName)) {
-            fullNameET.requestFocus();
-            fullNameET.setError("Enter only alphabetical characters ");
+    private boolean validationInfo(String fullName, String phoneNumber) {
+        if (isFieldEmpty(fullName,fullNameET) && isAlphabeticalString(fullName)) {
             return false;
         }
-        if (isFieldEmpty(gardenName, gardenNameET)) {
-            return false;
-        }
+
         if (isFieldEmpty(phoneNumber, phoneNumberET)) {
             return false;
         }
@@ -114,12 +99,8 @@ public class RegisterActivity extends AppCompatActivity {
             phoneNumberET.setError("Enter a valid phone number");
             return false;
         }
-        if (isAlphabeticalString(gardenName)) {
-            gardenNameET.requestFocus();
-            gardenNameET.setError("Enter only alphabetical characters");
-            return false;
-        }
-        return isPasswordValid(password, passwordET);
+
+        return true;
     }
 
 

@@ -28,32 +28,32 @@
 
 
             <TextView
-                android:id="@+id/loginText"
+                android:id="@+id/addKindergarten"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/login"
+                android:text="Add a new kindergarten"
                 android:textAlignment="center"
                 android:textColor="@color/colorRegister"
-                android:textSize="36sp"
+                android:textSize="28sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/loginPhoneNumber"
+                android:id="@+id/kindergartenName"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
                 android:autofillHints=""
                 android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/ic_phone"
+                android:drawableLeft="@drawable/ic_children"
                 android:drawablePadding="8dp"
-                android:hint="@string/phone_number"
+                android:hint="@string/the_name_of_kindergarten"
                 android:padding="10dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background"
                 tools:ignore="TextFields" />
 
             <EditText
-                android:id="@+id/loginPassword"
+                android:id="@+id/Password"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
@@ -68,30 +68,22 @@
                 android:textColorHighlight="@color/cardview_dark_background" />
 
             <Button
-                android:id="@+id/loginButton"
+                android:id="@+id/addKindergartenButton"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/colorRegister"
-                android:text="@string/login"
+                android:text="@string/add"
                 android:textSize="18sp"
                 app:cornerRadius="20dp" />
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Dont have an Account?"
-                    android:layout_gravity="center"
-                    android:textColor="@color/black"
-                    tools:ignore="RtlHardcoded" />
-
             <TextView
-                android:id="@+id/textViewSignUp"
+                android:id="@+id/textGoToHomePage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="SignUp"
+                android:text="Go to home page"
                 android:textColor="@color/colorRegister"
                 tools:ignore="RtlHardcoded" />
 

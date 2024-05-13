@@ -1,7 +1,7 @@
 package com.example.keepy;
 
 public class HelperClass {
-    String fullName, gardenName, phoneNumber, password;
+    String fullName, phoneNumber;
 
     public String getFullName() {
         return fullName;
@@ -11,13 +11,6 @@ public class HelperClass {
         this.fullName = fullName;
     }
 
-    public String getGardenName() {
-        return gardenName;
-    }
-
-    public void setGardenName(String gardenName) {
-        this.gardenName = gardenName;
-    }
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -27,19 +20,10 @@ public class HelperClass {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getPassword() {
-        return password;
-    }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public HelperClass(String fullName, String gardenName, String phoneNumber, String password) {
+    public HelperClass(String fullName, String phoneNumber) {
         this.fullName = fullName;
-        this.gardenName = gardenName;
         this.phoneNumber = phoneNumber;
-        this.password = password;
     }
     public HelperClass() {
     }

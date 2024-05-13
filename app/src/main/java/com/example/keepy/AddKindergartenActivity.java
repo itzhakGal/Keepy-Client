@@ -16,25 +16,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 
-public class LoginActivity extends AppCompatActivity {
+public class AddKindergartenActivity extends AppCompatActivity {
 
-    EditText phoneNumberET, passwordET;
-    Button loginBtn;
-    TextView textViewSignUp;
+    EditText kindergartenNameET, kindergartenPasswordET;
+    Button addKindergartenButton;
+    TextView textGoToHomePage;
 
     Button buttonNotification;
 
@@ -42,26 +38,26 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_add_kindergarten);
 
-        phoneNumberET = findViewById(R.id.loginPhoneNumber);
-        passwordET = findViewById(R.id.loginPassword);
-        loginBtn = findViewById(R.id.loginButton);
-        textViewSignUp = findViewById(R.id.textViewSignUp);
+        kindergartenNameET = findViewById(R.id.kindergartenName);
+        kindergartenPasswordET = findViewById(R.id.Password);
+        addKindergartenButton = findViewById(R.id.addKindergartenButton);
+        textGoToHomePage = findViewById(R.id.textGoToHomePage);
 
-        textViewSignUp.setOnClickListener(new View.OnClickListener() {
+        textGoToHomePage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                startActivity(new Intent(AddKindergartenActivity.this, HomePageActivity.class));
             }
         });
 
         buttonNotification = findViewById(R.id.buttonNotification);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(LoginActivity.this,
+            if (ContextCompat.checkSelfPermission(AddKindergartenActivity.this,
                     android.Manifest.permission.POST_NOTIFICATIONS) !=
                     PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(LoginActivity.this,
+                ActivityCompat.requestPermissions(AddKindergartenActivity.this,
                         new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, 101);
             }
         }
@@ -72,11 +68,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        loginBtn.setOnClickListener(new View.OnClickListener() {
+        addKindergartenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phoneNumber = phoneNumberET.getText().toString();
-                String password = passwordET.getText().toString();
+                String phoneNumber = kindergartenNameET.getText().toString();
+                String password = kindergartenPasswordET.getText().toString();
 
                 boolean check = validationInfo(phoneNumber, password);
                 if (check) {
@@ -89,42 +85,38 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void checkUser() {
-        String userPhoneNumber = phoneNumberET.getText().toString().trim();
-        String userPassword = passwordET.getText().toString().trim();
+        String kindergartenName = kindergartenNameET.getText().toString().trim();
+        String userPassword = kindergartenPasswordET.getText().toString().trim();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-        Query checkUserDatabase = reference.orderByChild("phoneNumber").equalTo(userPhoneNumber);
-        checkUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        Query checkUserDatabase = reference.orderByChild("phoneNumber").equalTo(kindergartenName);
+         /*checkUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    phoneNumberET.setError(null);
-                    String passwordFromDB = snapshot.child(userPhoneNumber).child("password").getValue(String.class);
+                    kindergartenNameET.setError(null);
+                    String passwordFromDB = snapshot.child(kindergartenName).child("password").getValue(String.class);
                     if (passwordFromDB.equals(userPassword)) {
-                        passwordET.setError(null);
-                        String nameFromDB = snapshot.child(userPhoneNumber).child("full name").getValue(String.class);
-                        String gardenNameDB = snapshot.child(userPhoneNumber).child("name of garden").getValue(String.class);
-                        String emailFromDB = snapshot.child(userPhoneNumber).child("phoneNumber").getValue(String.class);
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        kindergartenPasswordET.setError(null);
+                        String kindergartenNameDB = snapshot.child(kindergartenName).child("name of kindergarten").getValue(String.class);
+                        Intent intent = new Intent(AddKindergartenActivity.this, MainActivity.class);
                         Toast.makeText(getApplicationContext(), "Data is valid", Toast.LENGTH_SHORT).show();
-                        intent.putExtra("full name", nameFromDB);
-                        intent.putExtra("name of garden", gardenNameDB);
-                        intent.putExtra("phoneNumber", emailFromDB);
+                        intent.putExtra("kindergartenName", kindergartenNameDB);
                         intent.putExtra("password", passwordFromDB);
                         startActivity(intent);
                     } else {
-                        passwordET.setError("Invalid Credentials");
-                        passwordET.requestFocus();
+                        kindergartenPasswordET.setError("Invalid Credentials");
+                        kindergartenPasswordET.requestFocus();
                     }
                 } else {
-                    phoneNumberET.setError("User does not exist");
-                    phoneNumberET.requestFocus();
+                    kindergartenNameET.setError("User does not exist");
+                    kindergartenNameET.requestFocus();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
-        });
+        });*/
     }
 
 
@@ -166,11 +158,11 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private boolean validationInfo(String phoneNumber, String password) {
+    private boolean validationInfo(String kindergartenName, String password) {
 
-        if (isFieldEmpty(phoneNumber, phoneNumberET) && isValidPhoneNumber(phoneNumber)) {
+        if (isFieldEmpty(kindergartenName, kindergartenNameET)) {
             return false;
-        } else return isPasswordValid(password, passwordET);
+        } else return isPasswordValid(password, kindergartenPasswordET);
     }
 
     private boolean isFieldEmpty(String field, EditText editText) {

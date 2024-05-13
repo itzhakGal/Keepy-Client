@@ -56,21 +56,6 @@
 
 
             <EditText
-                android:id="@+id/gardenName"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:autofillHints=""
-                android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/ic_children"
-                android:drawablePadding="8dp"
-                android:hint="@string/the_name_of_the_garden"
-                android:padding="8dp"
-                android:textColor="@color/black"
-                android:textColorHighlight="@color/cardview_dark_background"
-                tools:ignore="TextFields" />
-
-            <EditText
                 android:id="@+id/registerPhoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -85,21 +70,6 @@
                 android:textColorHighlight="@color/cardview_dark_background"
                 tools:ignore="TextFields" />
 
-            <EditText
-                android:id="@+id/registerPassword"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:autofillHints=""
-                android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/ic_password1"
-                android:drawablePadding="8dp"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                android:padding="8dp"
-                android:textColor="@color/black"
-                android:textColorHighlight="@color/cardview_dark_background" />
-
             <Button
                 android:id="@+id/registerButton"
                 android:layout_width="match_parent"
@@ -109,20 +79,6 @@
                 android:text="@string/register"
                 android:textSize="18sp"
                 app:cornerRadius="20dp" />
-
-            <TextView
-                android:id="@+id/alreadyHaveAccount"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="16dp"
-                android:rotationX="2"
-                android:shadowColor="@color/black"
-                android:gravity="center"
-                android:text="@string/already_have_an_account"
-                android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="@+id/btnRegister"
-                app:layout_constraintStart_toStartOf="@+id/btnRegister"
-                app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
 
 
         </LinearLayout>
