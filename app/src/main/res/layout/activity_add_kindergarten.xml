@@ -102,6 +102,13 @@
 
     </androidx.cardview.widget.CardView>
 
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foregroundTint="#A36E6E"
+        android:padding="20sp"
+        card_view:srcCompat="@drawable/kindergarten2" />
 
 
 </LinearLayout>

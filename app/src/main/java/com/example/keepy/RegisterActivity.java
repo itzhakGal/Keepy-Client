@@ -6,11 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.keepy.helperClass.UserDetailsHelperClass;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -42,13 +41,15 @@ public class RegisterActivity extends AppCompatActivity {
                 String fullName = fullNameET.getText().toString();
                 String phoneNumber = phoneNumberET.getText().toString();
 
-                HelperClass helperClass = new HelperClass(fullName, phoneNumber);
-                reference.child(phoneNumber).setValue(helperClass);
+                UserDetailsHelperClass userDetailsHelperClass = new UserDetailsHelperClass(fullName, phoneNumber);
+                reference.child(phoneNumber).setValue(userDetailsHelperClass);
 
                 boolean check = validationInfo(fullName, phoneNumber);
                 if(check) {
                     Toast.makeText(getApplicationContext(), "Data is valid", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(RegisterActivity.this, HomePageActivity.class));
+                    Intent intent = new Intent(RegisterActivity.this, HomePageActivity.class);
+                    intent.putExtra("currentUserPhoneNumber", phoneNumber);
+                    startActivity(intent);
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "Sorry check information again", Toast.LENGTH_SHORT).show();

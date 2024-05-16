@@ -1,6 +1,6 @@
-package com.example.keepy;
+package com.example.keepy.helperClass;
 
-public class HelperClass {
+public class UserDetailsHelperClass {
     String fullName, phoneNumber;
 
     public String getFullName() {
@@ -21,10 +21,10 @@ public class HelperClass {
     }
 
 
-    public HelperClass(String fullName, String phoneNumber) {
+    public UserDetailsHelperClass(String fullName, String phoneNumber) {
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
     }
-    public HelperClass() {
+    public UserDetailsHelperClass() {
     }
 }

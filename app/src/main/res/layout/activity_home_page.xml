@@ -13,48 +13,73 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:gravity="center"
         android:orientation="vertical"
         android:padding="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.172"
+        app:layout_constraintVertical_bias="0.254"
         tools:layout_editor_absoluteX="0dp">
 
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/textViewTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#2D4E0B0B"
-            android:text="הגנים שלי: "
+            android:text="My Kindergartens"
             android:textAlignment="center"
             android:textColor="@color/colorRegister"
             android:textSize="36sp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold|italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/colorRegister"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewTitle" />
 
 
         <TextView
             android:id="@+id/textView10"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/custom_edittext"
-            android:padding="10sp"
-            android:textStyle="bold"
-            android:text="-אין גנים משוייכים" />
+            android:gravity="center"
+            android:padding="15sp"
+            android:text="@string/no_kindergartens_available"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textAddKindergarten"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:padding="15sp"
-            android:text="+הוספת גן"
+            android:padding="18sp"
+            android:text="+Add Kindergarten"
             android:textColor="@color/colorRegister"
             android:textSize="16sp"
             android:textStyle="bold"
             tools:ignore="RtlHardcoded" />
 
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="232dp"
+            android:layout_height="199dp"
+            android:padding="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/kindergarten"
+            tools:layout_editor_absoluteY="400dp" />
 
     </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

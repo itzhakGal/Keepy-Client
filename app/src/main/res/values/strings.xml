@@ -31,5 +31,7 @@
     <string name="phone_number">Phone number</string>
     <string name="the_name_of_kindergarten">The name of kindergarten</string>
     <string name="add">Add</string>
+    <string name="my_kindergartens">My Kindergartens</string>
+    <string name="no_kindergartens_available">No kindergartens available</string>
 
 </resources>

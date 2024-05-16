@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class HomePageActivity extends AppCompatActivity {
     TextView textAddKindergarten;
+    String currentUserPhoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +26,25 @@ public class HomePageActivity extends AppCompatActivity {
             return insets;
         });
 
+        Intent intent = getIntent();
+        currentUserPhoneNumber = intent.getStringExtra("currentUserPhoneNumber");
+
         textAddKindergarten =findViewById(R.id.textAddKindergarten);
         textAddKindergarten.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomePageActivity.this, AddKindergartenActivity.class));
+                Intent intent = new Intent(HomePageActivity.this, AddKindergartenActivity.class);
+                intent.putExtra("currentUserPhoneNumber", currentUserPhoneNumber);
+                startActivity(intent);
             }
         });
     }
+    public String getCurrentUserPhoneNumber() {
+        return currentUserPhoneNumber;
+    }
+
+    public void setCurrentUserPhoneNumber(String currentUserPhoneNumber) {
+        this.currentUserPhoneNumber = currentUserPhoneNumber;
+    }
+
 }
