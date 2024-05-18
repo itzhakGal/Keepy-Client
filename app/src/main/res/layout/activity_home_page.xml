@@ -10,6 +10,7 @@
     android:background="@drawable/background">
 
     <LinearLayout
+        android:id="@+id/linear_layout_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -26,7 +27,7 @@
             android:id="@+id/textViewTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="My Kindergartens"
+            android:text= "My Kindergartens"
             android:textAlignment="center"
             android:textColor="@color/colorRegister"
             android:textSize="36sp"
@@ -44,11 +45,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textViewTitle" />
 
-
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/textViewKindergartenHome"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/custom_edittext"
             android:gravity="center"
@@ -56,6 +56,13 @@
             android:text="@string/no_kindergartens_available"
             android:textSize="18sp"
             android:textStyle="bold" />
+
+        <ListView
+            android:id="@+id/listViewKindergartens"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cacheColorHint="#00BCD4"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/textAddKindergarten"
@@ -79,7 +86,15 @@
             app:srcCompat="@drawable/kindergarten"
             tools:layout_editor_absoluteY="400dp" />
 
+        <Button
+            android:id="@+id/logoutButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Log out" />
+
+
     </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

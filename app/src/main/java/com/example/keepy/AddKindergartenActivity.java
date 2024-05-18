@@ -38,10 +38,8 @@ public class AddKindergartenActivity extends AppCompatActivity {
     TextView textGoToHomePage;
     Button buttonNotification;
     String currentUserPhoneNumber;
-
     DatabaseReference databaseReference;
 
-    @SuppressLint({"MissingInflatedId", "CutPasteId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +57,9 @@ public class AddKindergartenActivity extends AppCompatActivity {
         textGoToHomePage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AddKindergartenActivity.this, HomePageActivity.class));
+                Intent intent = new Intent(AddKindergartenActivity.this, HomePageActivity.class);
+                intent.putExtra("currentUserPhoneNumber", currentUserPhoneNumber);
+                startActivity(intent);
             }
         });
 
@@ -99,7 +99,7 @@ public class AddKindergartenActivity extends AppCompatActivity {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("kindergartens");
 
         // Inserting the first kindergarten data
-          String orenId = reference.push().getKey();
+        String orenId = reference.push().getKey();
         KindergartenDetailsHelperClass orenKindergarten = new KindergartenDetailsHelperClass("oren", "55555");
         reference.child("oren").setValue(orenKindergarten);
 
@@ -134,7 +134,7 @@ public class AddKindergartenActivity extends AppCompatActivity {
                             kindergartenPasswordET.setError(null);
                             saveKindergartenDetails(kindergartenName, password);
                             Toast.makeText(getApplicationContext(), "Kindergarten details are valid", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(AddKindergartenActivity.this, MainActivity.class);
+                            Intent intent = new Intent(AddKindergartenActivity.this, HomePageActivity.class);
                             intent.putExtra("kindergartenName", kindergartenName);
                             intent.putExtra("password", password);
                             startActivity(intent);
