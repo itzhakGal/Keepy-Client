@@ -34,5 +34,6 @@
     <string name="my_kindergartens">My Kindergartens</string>
     <string name="no_kindergartens_available">No kindergartens available</string>
     <string name="log_out">Log Out</string>
+    <string name="makeNotification">make notification</string>
 
 </resources>

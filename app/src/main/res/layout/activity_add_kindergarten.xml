@@ -31,6 +31,7 @@
                 android:id="@+id/addKindergarten"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="serif"
                 android:text="Add a new kindergarten"
                 android:textAlignment="center"
                 android:textColor="@color/colorRegister"
@@ -47,6 +48,9 @@
                 android:drawableLeft="@drawable/ic_children"
                 android:drawablePadding="8dp"
                 android:hint="@string/the_name_of_kindergarten"
+                android:textStyle="bold"
+                android:textSize="17sp"
+                android:fontFamily="casual"
                 android:padding="10dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background"
@@ -61,7 +65,10 @@
                 android:background="@drawable/custom_edittext"
                 android:drawableLeft="@drawable/ic_password1"
                 android:drawablePadding="8dp"
+                android:textSize="17sp"
                 android:hint="@string/password"
+                android:fontFamily="casual"
+                android:textStyle="bold"
                 android:inputType="textPassword"
                 android:padding="8dp"
                 android:textColor="@color/black"
@@ -74,6 +81,9 @@
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/colorRegister"
                 android:text="@string/add"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:fontFamily="casual"
                 android:textSize="18sp"
                 app:cornerRadius="20dp" />
 
@@ -84,6 +94,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Go to home page"
+                android:textStyle="bold"
+                android:fontFamily="casual"
                 android:textColor="@color/colorRegister"
                 tools:ignore="RtlHardcoded" />
 
@@ -92,7 +104,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/make_notification"
+                android:text="@string/makeNotification"
+                android:fontFamily="casual"
+                android:textStyle="bold"
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="MissingConstraints" />
@@ -102,13 +117,31 @@
 
     </androidx.cardview.widget.CardView>
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:foregroundTint="#A36E6E"
-        android:padding="20sp"
-        card_view:srcCompat="@drawable/kindergarten2" />
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:foregroundTint="#A36E6E"
+            android:padding="10sp"
+            card_view:srcCompat="@drawable/kindergarten2" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="200dp"
+            android:layout_height="120dp"
+            android:padding="10sp"
+            card_view:srcCompat="@drawable/kindergarten4" />
+
+
+    </LinearLayout>
+
+
 
 
 </LinearLayout>

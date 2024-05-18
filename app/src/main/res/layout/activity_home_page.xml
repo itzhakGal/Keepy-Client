@@ -27,11 +27,12 @@
             android:id="@+id/textViewTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text= "My Kindergartens"
+            android:fontFamily="serif"
+            android:text="My Kindergartens"
             android:textAlignment="center"
             android:textColor="@color/colorRegister"
             android:textSize="36sp"
-            android:textStyle="bold|italic"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -53,6 +54,7 @@
             android:background="@drawable/custom_edittext"
             android:gravity="center"
             android:padding="15sp"
+            android:fontFamily="casual"
             android:text="@string/no_kindergartens_available"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -62,7 +64,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:cacheColorHint="#00BCD4"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:fontFamily="casual"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/textAddKindergarten"
@@ -73,24 +77,40 @@
             android:text="+Add Kindergarten"
             android:textColor="@color/colorRegister"
             android:textSize="16sp"
+            android:fontFamily="casual"
             android:textStyle="bold"
             tools:ignore="RtlHardcoded" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="232dp"
-            android:layout_height="199dp"
+            android:layout_width="200dp"
+            android:layout_height="180dp"
             android:padding="10sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/kindergarten"
             tools:layout_editor_absoluteY="400dp" />
 
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:srcCompat="@drawable/kindergarten3" />
+    </LinearLayout>
         <Button
             android:id="@+id/logoutButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Log out" />
+            android:text="Log out"
+            android:fontFamily="casual"
+            android:textStyle="bold"/>
+
+
 
 
     </LinearLayout>

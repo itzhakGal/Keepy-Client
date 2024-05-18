@@ -60,6 +60,7 @@ public class AddKindergartenActivity extends AppCompatActivity {
                 Intent intent = new Intent(AddKindergartenActivity.this, HomePageActivity.class);
                 intent.putExtra("currentUserPhoneNumber", currentUserPhoneNumber);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
 
