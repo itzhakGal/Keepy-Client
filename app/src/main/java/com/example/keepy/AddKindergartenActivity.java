@@ -12,8 +12,11 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,8 +54,11 @@ public class AddKindergartenActivity extends AppCompatActivity {
         textGoToHomePage = findViewById(R.id.textGoToHomePage);
         Intent intent = getIntent();
         currentUserPhoneNumber = intent.getStringExtra("currentUserPhoneNumber");
-
         databaseReference = FirebaseDatabase.getInstance().getReference("users").child(currentUserPhoneNumber).child("MyKindergartens");
+
+
+        imageAnimations();
+
 
         textGoToHomePage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +100,16 @@ public class AddKindergartenActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+
+    private void imageAnimations() {
+        ImageView imageView = findViewById(R.id.imageView5);
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        imageView.startAnimation(animation);
+        ImageView imageView1 = findViewById(R.id.imageView6);
+        Animation animation1 = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        imageView1.startAnimation(animation1);
     }
 
     private void createTestData() {
@@ -190,11 +206,10 @@ public class AddKindergartenActivity extends AppCompatActivity {
         intent.putExtra("data", "some value to be passed here");
 
         PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),
-                0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE); // Add FLAG_IMMUTABLE
         builder.setContentIntent(pendingIntent);
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel =
@@ -211,7 +226,6 @@ public class AddKindergartenActivity extends AppCompatActivity {
         }
 
         notificationManager.notify(0, builder.build());
-
     }
 
     private boolean validationInfo(String kindergartenName, String password) {
