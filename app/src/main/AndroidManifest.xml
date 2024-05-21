@@ -17,6 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Keepy"
         tools:targetApi="31">
+
+
         <activity
             android:name=".HomePageActivity"
             android:exported="false" />
