@@ -111,7 +111,7 @@ public class HomePageActivity extends AppCompatActivity {
                 String selectedKindergarten = (String) parent.getItemAtPosition(position);
 
                 // Start MainActivity and pass selected kindergarten name and user phone number
-                Intent intent = new Intent(HomePageActivity.this, MainActivity.class);
+                Intent intent = new Intent(HomePageActivity.this, UserMainActivity.class);
                 intent.putExtra("kindergartenName", selectedKindergarten);
                 intent.putExtra("currentUserPhoneNumber", currentUserPhoneNumber);
                 startActivity(intent);

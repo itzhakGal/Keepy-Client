@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.keepy.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class UserMainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;

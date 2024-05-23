@@ -1,7 +1,6 @@
 package com.example.keepy;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -116,17 +115,14 @@ public class AddKindergartenActivity extends AppCompatActivity {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("kindergartens");
 
         // Inserting the first kindergarten data
-        String orenId = reference.push().getKey();
         KindergartenDetailsHelperClass orenKindergarten = new KindergartenDetailsHelperClass("oren", "55555");
         reference.child("oren").setValue(orenKindergarten);
 
         // Inserting the second kindergarten data
-        String shakenId = reference.push().getKey();
         KindergartenDetailsHelperClass shakenKindergarten = new KindergartenDetailsHelperClass("shaked", "11111");
         reference.child("shaked").setValue(shakenKindergarten);
 
         // Inserting the third kindergarten data
-        String taliId = reference.push().getKey();
         KindergartenDetailsHelperClass taliKindergarten = new KindergartenDetailsHelperClass("tali", "33333");
         reference.child("tali").setValue(taliKindergarten);
     }
