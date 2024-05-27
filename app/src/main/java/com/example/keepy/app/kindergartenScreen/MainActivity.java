@@ -1,9 +1,11 @@
-package com.example.keepy;
+package com.example.keepy.app.kindergartenScreen;
 
 import android.os.Bundle;
-import android.view.View;
 import android.view.Menu;
 
+import com.example.keepy.ApiClient;
+import com.example.keepy.ApiService;
+import com.example.keepy.R;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 

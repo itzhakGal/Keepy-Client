@@ -1,4 +1,4 @@
-package com.example.keepy;
+package com.example.keepy.app.homePageScreen;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +17,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.keepy.R;
+import com.example.keepy.app.kindergartenScreen.MainActivity;
+import com.example.keepy.app.registerScreen.RegisterActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

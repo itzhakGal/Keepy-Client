@@ -7,7 +7,7 @@
     android:background="@drawable/background"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".ui.home.HomeFragment">
+    tools:context=".app.kindergartenScreen.ui.home.HomeFragment">
 
 
     <TextView

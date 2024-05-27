@@ -1,7 +1,6 @@
-package com.example.keepy;
+package com.example.keepy.app.homePageScreen;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -26,7 +25,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.keepy.helperClass.KindergartenDetailsHelperClass;
+import com.example.keepy.NotificationActivity;
+import com.example.keepy.R;
+import com.example.keepy.app.helperClass.KindergartenDetailsHelperClass;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

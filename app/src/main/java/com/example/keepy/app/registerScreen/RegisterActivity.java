@@ -1,8 +1,11 @@
-package com.example.keepy;
+package com.example.keepy.app.registerScreen;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,8 +13,12 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
-import com.example.keepy.helperClass.UserDetailsHelperClass;
+import com.example.keepy.app.homePageScreen.HomePageActivity;
+import com.example.keepy.R;
+import com.example.keepy.app.helperClass.UserDetailsHelperClass;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -35,6 +42,13 @@ public class RegisterActivity extends AppCompatActivity {
         registerBtn = findViewById(R.id.registerButton);
         rememberMeCB = findViewById(R.id.rememberMe);
 
+
+        //////////////////////////
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
+            }
+        }
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override

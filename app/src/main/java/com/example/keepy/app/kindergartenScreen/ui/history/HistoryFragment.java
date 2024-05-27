@@ -1,4 +1,4 @@
-package com.example.keepy.ui.history;
+package com.example.keepy.app.kindergartenScreen.ui.history;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
