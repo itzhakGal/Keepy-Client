@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@drawable/background"
-    tools:context=".UserMainActivity">
+    tools:context=".app.kindergartenScreen.MainActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

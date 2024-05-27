@@ -1,4 +1,4 @@
-package com.example.keepy.ui.camera;
+package com.example.keepy.app.kindergartenScreen.ui.camera;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

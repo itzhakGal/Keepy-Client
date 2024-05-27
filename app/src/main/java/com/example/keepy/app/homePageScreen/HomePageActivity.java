@@ -1,4 +1,4 @@
-package com.example.keepy;
+package com.example.keepy.app.homePageScreen;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +17,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.keepy.R;
+import com.example.keepy.app.kindergartenScreen.ui.MainActivity;
+import com.example.keepy.app.registerScreen.RegisterActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -111,7 +114,7 @@ public class HomePageActivity extends AppCompatActivity {
                 String selectedKindergarten = (String) parent.getItemAtPosition(position);
 
                 // Start MainActivity and pass selected kindergarten name and user phone number
-                Intent intent = new Intent(HomePageActivity.this, UserMainActivity.class);
+                Intent intent = new Intent(HomePageActivity.this, MainActivity.class);
                 intent.putExtra("kindergartenName", selectedKindergarten);
                 intent.putExtra("currentUserPhoneNumber", currentUserPhoneNumber);
                 startActivity(intent);

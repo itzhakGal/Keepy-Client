@@ -1,4 +1,4 @@
-package com.example.keepy.ui.camera;
+package com.example.keepy.app.kindergartenScreen.ui.camera;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
