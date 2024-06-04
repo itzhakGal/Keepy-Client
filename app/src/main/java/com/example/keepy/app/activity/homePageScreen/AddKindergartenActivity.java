@@ -48,9 +48,7 @@ public class AddKindergartenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_kindergarten);
-
-
-        createTestData();
+        
         kindergartenNameET = findViewById(R.id.kindergartenName);
         kindergartenPasswordET = findViewById(R.id.Password);
         addKindergartenButton = findViewById(R.id.addKindergartenButton);
