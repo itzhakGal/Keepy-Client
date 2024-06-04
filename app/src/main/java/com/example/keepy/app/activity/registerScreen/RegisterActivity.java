@@ -1,4 +1,4 @@
-package com.example.keepy.app.registerScreen;
+package com.example.keepy.app.activity.registerScreen;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -16,9 +16,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.keepy.app.homePageScreen.HomePageActivity;
 import com.example.keepy.R;
-import com.example.keepy.app.helperClass.UserDetailsHelperClass;
+import com.example.keepy.app.activity.homePageScreen.HomePageActivity;
+import com.example.keepy.app.domain.UserDetailsHelperClass;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -29,6 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
     CheckBox rememberMeCB;
     FirebaseDatabase database;
     DatabaseReference reference;
+    FirebaseAuth mAuth;
     String currentUserPhoneNumber;
 
     @SuppressLint({"CutPasteId", "MissingInflatedId"})
@@ -42,8 +45,8 @@ public class RegisterActivity extends AppCompatActivity {
         registerBtn = findViewById(R.id.registerButton);
         rememberMeCB = findViewById(R.id.rememberMe);
 
+        mAuth = FirebaseAuth.getInstance();
 
-        //////////////////////////
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
@@ -53,40 +56,36 @@ public class RegisterActivity extends AppCompatActivity {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                database = FirebaseDatabase.getInstance();
-                reference = database.getReference("users");
-
                 String fullName = fullNameET.getText().toString();
                 String phoneNumber = phoneNumberET.getText().toString();
 
-                UserDetailsHelperClass userDetailsHelperClass = new UserDetailsHelperClass(fullName, phoneNumber);
-                reference.child(phoneNumber).setValue(userDetailsHelperClass);
-
                 boolean check = validationInfo(fullName, phoneNumber);
-                if(check) {
-                    Toast.makeText(getApplicationContext(), "Data is valid", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(RegisterActivity.this, HomePageActivity.class);
-                    intent.putExtra("currentUserPhoneNumber", phoneNumber);
-                    startActivity(intent);
-                }
-                else{
-                    Toast.makeText(getApplicationContext(), "Sorry check information again", Toast.LENGTH_SHORT).show();
+                if (check) {
+                    mAuth.signInAnonymously().addOnCompleteListener(RegisterActivity.this, task -> {
+                        if (task.isSuccessful()) {
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            writeNewUser(phoneNumber, fullName, phoneNumber);
+                        } else {
+                            Toast.makeText(RegisterActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    Toast.makeText(getApplicationContext(), "Sorry, check information again", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-       SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
-       String checkbox = preferences.getString("remember", "");
-       if (checkbox.equals("true")) {
+        SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+        String checkbox = preferences.getString("remember", "");
+        if (checkbox.equals("true")) {
             currentUserPhoneNumber = preferences.getString("phoneNumber", "");
-           Intent intent = new Intent(RegisterActivity.this, HomePageActivity.class);
-           intent.putExtra("currentUserPhoneNumber", currentUserPhoneNumber);
-           startActivity(intent);
-         } else if (checkbox.equals("false")) {
+            Intent intent = new Intent(RegisterActivity.this, HomePageActivity.class);
+            intent.putExtra("currentUserPhoneNumber", currentUserPhoneNumber);
+            startActivity(intent);
+        } else if (checkbox.equals("false")) {
+            Toast.makeText(this, "Please Sign in", Toast.LENGTH_SHORT).show();
+        }
 
-           Toast.makeText(this, "Please Sign in", Toast.LENGTH_SHORT).show();
-       }
         rememberMeCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,20 +107,32 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    private void writeNewUser(String userId, String fullName, String phoneNumber) {
+        database = FirebaseDatabase.getInstance("https://keppy-5ed11.firebaseio.com/");
+        reference = database.getReference("users");
+
+        UserDetailsHelperClass userDetailsHelperClass = new UserDetailsHelperClass(fullName, phoneNumber);
+        reference.child(userId).setValue(userDetailsHelperClass, (databaseError, databaseReference) -> {
+            if (databaseError != null) {
+                Toast.makeText(getApplicationContext(), "Error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "Data is valid", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(RegisterActivity.this, HomePageActivity.class);
+                intent.putExtra("currentUserPhoneNumber", phoneNumber);
+                startActivity(intent);
+            }
+        });
+    }
+
     private boolean isAlphabeticalString(String str) {
-        if (str.matches("[a-zA-Z\u0590-\u05FF\\s]+"))
-        {
-        return true;
-        }
-        else
-        {
+        if (str.matches("[a-zA-Z\u0590-\u05FF\\s]+")) {
+            return true;
+        } else {
             fullNameET.requestFocus();
             fullNameET.setError("Enter only alphabetical characters ");
             return false;
         }
-
     }
-
 
     private boolean isFieldEmpty(String field, EditText editText) {
         if (field.isEmpty()) {
@@ -138,14 +149,11 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean validationInfo(String fullName, String phoneNumber) {
-        if (isFieldEmpty(fullName,fullNameET) && isAlphabeticalString(fullName)) {
+        if (isFieldEmpty(fullName, fullNameET) || !isAlphabeticalString(fullName)) {
             return false;
         }
 
-        if (isFieldEmpty(phoneNumber, phoneNumberET)) {
-            return false;
-        }
-        if (!isValidPhoneNumber(phoneNumber)) {
+        if (isFieldEmpty(phoneNumber, phoneNumberET) || !isValidPhoneNumber(phoneNumber)) {
             phoneNumberET.requestFocus();
             phoneNumberET.setError("Enter a valid phone number");
             return false;
@@ -153,7 +161,4 @@ public class RegisterActivity extends AppCompatActivity {
 
         return true;
     }
-
-
-
 }

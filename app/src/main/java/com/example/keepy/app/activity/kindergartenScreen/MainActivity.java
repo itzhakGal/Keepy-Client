@@ -1,10 +1,8 @@
-package com.example.keepy.app.kindergartenScreen.ui;
+package com.example.keepy.app.activity.kindergartenScreen;
 
 import android.os.Bundle;
 import android.view.Menu;
 
-import com.example.keepy.ApiClient;
-import com.example.keepy.ApiService;
 import com.example.keepy.R;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -17,7 +15,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.keepy.databinding.ActivityMainBinding;
-import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {

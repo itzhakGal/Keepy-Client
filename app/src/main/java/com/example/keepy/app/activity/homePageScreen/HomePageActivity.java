@@ -1,4 +1,4 @@
-package com.example.keepy.app.homePageScreen;
+package com.example.keepy.app.activity.homePageScreen;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,8 +18,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.keepy.R;
-import com.example.keepy.app.kindergartenScreen.ui.MainActivity;
-import com.example.keepy.app.registerScreen.RegisterActivity;
+import com.example.keepy.app.activity.kindergartenScreen.MainActivity;
+import com.example.keepy.app.activity.registerScreen.RegisterActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -53,7 +53,7 @@ public class HomePageActivity extends AppCompatActivity {
         kindergartenListView = findViewById(R.id.listViewKindergartens);
         logoutButton = findViewById(R.id.logoutButton);
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users")
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://keppy-5ed11.firebaseio.com/").getReference("users")
                 .child(currentUserPhoneNumber).child("MyKindergartens");
 
         // Initially hide both TextView and ListView

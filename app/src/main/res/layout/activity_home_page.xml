@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbarSize="25dp"
-    tools:context=".app.homePageScreen.HomePageActivity"
+    tools:context=".app.activity.homePageScreen.HomePageActivity"
     android:background="@drawable/background">
 
     <LinearLayout

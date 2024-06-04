@@ -1,4 +1,4 @@
-package com.example.keepy.app.kindergartenScreen.ui.history;
+package com.example.keepy.app.activity.kindergartenScreen.history;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

@@ -1,16 +1,16 @@
-package com.example.keepy.app.kindergartenScreen.ui.details;
+package com.example.keepy.app.activity.kindergartenScreen.camera;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class DetailsViewModel extends ViewModel {
+public class CameraViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public DetailsViewModel() {
+    public CameraViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is details fragment");
+        mText.setValue("This is camera fragment");
     }
 
     public LiveData<String> getText() {

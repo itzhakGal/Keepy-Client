@@ -1,4 +1,4 @@
-package com.example.keepy.app.helperClass;
+package com.example.keepy.app.domain;
 
 public class UserDetailsHelperClass {
     String fullName, phoneNumber;

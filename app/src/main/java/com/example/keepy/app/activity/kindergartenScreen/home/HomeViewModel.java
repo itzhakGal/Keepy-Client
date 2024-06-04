@@ -1,4 +1,4 @@
-package com.example.keepy.app.kindergartenScreen.ui.home;
+package com.example.keepy.app.activity.kindergartenScreen.home;
 
 import androidx.lifecycle.ViewModel;
 

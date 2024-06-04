@@ -1,4 +1,4 @@
-package com.example.keepy.app.homePageScreen;
+package com.example.keepy.app.activity.homePageScreen;
 
 import android.Manifest;
 import android.app.NotificationChannel;
@@ -27,7 +27,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.keepy.NotificationActivity;
 import com.example.keepy.R;
-import com.example.keepy.app.helperClass.KindergartenDetailsHelperClass;
+import com.example.keepy.app.domain.KindergartenDetailsHelperClass;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -49,13 +49,15 @@ public class AddKindergartenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_kindergarten);
 
+
+        createTestData();
         kindergartenNameET = findViewById(R.id.kindergartenName);
         kindergartenPasswordET = findViewById(R.id.Password);
         addKindergartenButton = findViewById(R.id.addKindergartenButton);
         textGoToHomePage = findViewById(R.id.textGoToHomePage);
         Intent intent = getIntent();
         currentUserPhoneNumber = intent.getStringExtra("currentUserPhoneNumber");
-        databaseReference = FirebaseDatabase.getInstance().getReference("users").child(currentUserPhoneNumber).child("MyKindergartens");
+        databaseReference = FirebaseDatabase.getInstance("https://keppy-5ed11.firebaseio.com/").getReference("users").child(currentUserPhoneNumber).child("MyKindergartens");
 
 
         imageAnimations();
@@ -114,7 +116,7 @@ public class AddKindergartenActivity extends AppCompatActivity {
     }
 
     private void createTestData() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("kindergartens");
+        DatabaseReference reference = FirebaseDatabase.getInstance("https://keppy-5ed11.firebaseio.com/").getReference("kindergartens");
 
         // Inserting the first kindergarten data
         KindergartenDetailsHelperClass orenKindergarten = new KindergartenDetailsHelperClass("oren", "55555");

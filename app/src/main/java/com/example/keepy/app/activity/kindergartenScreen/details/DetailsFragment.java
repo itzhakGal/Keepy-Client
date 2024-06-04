@@ -1,4 +1,4 @@
-package com.example.keepy.app.kindergartenScreen.ui.details;
+package com.example.keepy.app.activity.kindergartenScreen.details;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

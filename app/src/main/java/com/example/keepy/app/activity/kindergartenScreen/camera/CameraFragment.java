@@ -1,4 +1,4 @@
-package com.example.keepy.app.kindergartenScreen.ui.history;
+package com.example.keepy.app.activity.kindergartenScreen.camera;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.keepy.databinding.FragmentHistoryBinding;
+import com.example.keepy.databinding.FragmentCameraBinding;
 
-public class HistoryFragment extends Fragment {
+public class CameraFragment extends Fragment {
 
-    private FragmentHistoryBinding binding;
+    private FragmentCameraBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HistoryViewModel galleryViewModel =
-                new ViewModelProvider(this).get(HistoryViewModel.class);
+        CameraViewModel slideshowViewModel =
+                new ViewModelProvider(this).get(CameraViewModel.class);
 
-        binding = FragmentHistoryBinding.inflate(inflater, container, false);
+        binding = FragmentCameraBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textGallery;
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textSlideshow;
+        slideshowViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
