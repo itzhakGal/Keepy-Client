@@ -69,7 +69,6 @@ public class HomePageActivity extends AppCompatActivity {
                     String kindergartenName = snapshot.child("kindergartenName").getValue(String.class);
                     kindergartenNames.add(kindergartenName);
                 }
-
                 if (kindergartenNames.isEmpty()) {
                     kindergartenTextView.setVisibility(View.VISIBLE);
                 } else {

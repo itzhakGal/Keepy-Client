@@ -48,7 +48,7 @@ public class AddKindergartenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_kindergarten);
-        
+
         kindergartenNameET = findViewById(R.id.kindergartenName);
         kindergartenPasswordET = findViewById(R.id.Password);
         addKindergartenButton = findViewById(R.id.addKindergartenButton);
@@ -57,9 +57,7 @@ public class AddKindergartenActivity extends AppCompatActivity {
         currentUserPhoneNumber = intent.getStringExtra("currentUserPhoneNumber");
         databaseReference = FirebaseDatabase.getInstance("https://keppy-5ed11.firebaseio.com/").getReference("users").child(currentUserPhoneNumber).child("MyKindergartens");
 
-
         imageAnimations();
-
 
         textGoToHomePage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,7 +101,6 @@ public class AddKindergartenActivity extends AppCompatActivity {
         });
     }
 
-
     private void imageAnimations() {
         ImageView imageView = findViewById(R.id.imageView5);
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
@@ -131,7 +128,7 @@ public class AddKindergartenActivity extends AppCompatActivity {
 
 
     public void checkDetails() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("kindergartens");
+        DatabaseReference reference = FirebaseDatabase.getInstance("https://keppy-5ed11.firebaseio.com/").getReference("kindergartens");
 
         String kindergartenName = kindergartenNameET.getText().toString().trim();
         String password = kindergartenPasswordET.getText().toString().trim();
