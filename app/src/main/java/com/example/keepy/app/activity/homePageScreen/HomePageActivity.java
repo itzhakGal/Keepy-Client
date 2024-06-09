@@ -1,8 +1,14 @@
 package com.example.keepy.app.activity.homePageScreen;
 
+import static android.content.ContentValues.TAG;
+
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,18 +23,34 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.keepy.ApiService;
 import com.example.keepy.R;
+import com.example.keepy.app.TokenRequest;
 import com.example.keepy.app.activity.kindergartenScreen.MainActivity;
 import com.example.keepy.app.activity.registerScreen.RegisterActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class HomePageActivity extends AppCompatActivity {
+
     TextView textAddKindergarten;
     String currentUserPhoneNumber;
     TextView kindergartenTextView;
@@ -52,6 +74,7 @@ public class HomePageActivity extends AppCompatActivity {
         kindergartenTextView = findViewById(R.id.textViewKindergartenHome);
         kindergartenListView = findViewById(R.id.listViewKindergartens);
         logoutButton = findViewById(R.id.logoutButton);
+        FirebaseApp.initializeApp(this);
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://keppy-5ed11.firebaseio.com/").getReference("users")
                 .child(currentUserPhoneNumber).child("MyKindergartens");
@@ -86,9 +109,27 @@ public class HomePageActivity extends AppCompatActivity {
             }
         });
 
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
 
+                        // Get new FCM registration token
+                        String token = task.getResult();
 
-    // Set click listener for the ListView items
+                        // Log and toast
+                        Log.d(TAG, "FCM Token: " + token);
+
+                        // Send token to your server
+                        sendTokenToServer(token);
+                    }
+                });
+
+        // Set click listener for the ListView items
         kindergartenListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -133,8 +174,68 @@ public class HomePageActivity extends AppCompatActivity {
             }
         });
 
+        createNotificationChannel();
+
+
+    }
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            String channelId = getString(R.string.default_notification_channel_id);
+            String channelName = "Default Channel";
+            NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+    private void sendTokenToServer(String token) {
+        Retrofit retrofit = getRetrofitInstance();
+        ApiService apiService = retrofit.create(ApiService.class);
+
+        if (currentUserPhoneNumber != null && token != null) {
+            TokenRequest tokenRequest = new TokenRequest(currentUserPhoneNumber, token);
+
+            apiService.sendToken(tokenRequest).enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.isSuccessful()) {
+                        Log.d(TAG, "Token sent successfully");
+                    } else {
+                        Log.e(TAG, "Error sending token: " + response.message());
+                        try {
+                            Log.e(TAG, "Error body: " + response.errorBody().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    t.printStackTrace();
+                    Log.e(TAG, "Error sending token", t);
+                }
+            });
+        } else {
+            Log.e(TAG, "currentUserPhoneNumber or token is null. Cannot send token to server.");
+        }
     }
 
+
+    private Retrofit getRetrofitInstance() {
+
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(logging)
+                .build();
+
+        return new Retrofit.Builder()
+                .baseUrl("http://192.168.1.32:8080")
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+    }
 
     public String getCurrentUserPhoneNumber() {
         return currentUserPhoneNumber;

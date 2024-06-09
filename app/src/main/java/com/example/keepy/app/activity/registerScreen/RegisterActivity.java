@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RegisterActivity extends AppCompatActivity {
     EditText fullNameET, phoneNumberET;
@@ -31,6 +32,8 @@ public class RegisterActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference reference;
     FirebaseAuth mAuth;
+    FirebaseFirestore firestore;
+
     String currentUserPhoneNumber;
 
     @SuppressLint({"CutPasteId", "MissingInflatedId"})
@@ -45,6 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
         rememberMeCB = findViewById(R.id.rememberMe);
 
         mAuth = FirebaseAuth.getInstance();
+        firestore = FirebaseFirestore.getInstance();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
