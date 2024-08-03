@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@drawable/background"
-    tools:context=".UserMainActivity">
+    tools:context=".app.activity.homePageScreen.AddKindergartenActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -108,6 +108,7 @@
                 android:fontFamily="casual"
                 android:textStyle="bold"
                 android:textColor="@color/black"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="MissingConstraints" />
@@ -129,14 +130,9 @@
             android:layout_height="200dp"
             android:foregroundTint="#A36E6E"
             android:padding="10sp"
-            card_view:srcCompat="@drawable/kindergarten2" />
+            card_view:srcCompat="@drawable/kindergarten5" />
 
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="200dp"
-            android:layout_height="120dp"
-            android:padding="10sp"
-            card_view:srcCompat="@drawable/kindergarten4" />
+
 
 
     </LinearLayout>

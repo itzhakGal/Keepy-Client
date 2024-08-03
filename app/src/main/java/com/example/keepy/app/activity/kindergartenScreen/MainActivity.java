@@ -46,24 +46,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-       /* // Retrofit API call setup
-        ApiService apiService = ApiClient.getRetrofitInstance().create(ApiService.class);
-
-        // Make a GET request
-        apiService.getHello().enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if (response.isSuccessful()) {
-                    String data = response.body();
-                    Toast.makeText(MainActivity.this, data, Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Request failed", Toast.LENGTH_LONG).show();
-            }
-        });*/
     }
 
 

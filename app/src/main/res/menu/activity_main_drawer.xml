@@ -7,18 +7,18 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home"
-            android:title="@string/בית" />
+            android:title= "Home" />
         <item
             android:id="@+id/nav_details"
             android:icon="@drawable/ic_details"
-            android:title="@string/פרטים" />
+            android:title="Details" />
         <item
             android:id="@+id/nav_history"
             android:icon="@drawable/ic_history"
-            android:title="@string/התראה" />
+            android:title = "Notifications history" />
         <item
             android:id="@+id/nav_camera"
             android:icon="@drawable/ic_menu_camera"
-            android:title="@string/מצלמה" />
+            android:title="Camera" />
     </group>
 </menu>

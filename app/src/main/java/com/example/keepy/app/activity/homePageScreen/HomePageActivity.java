@@ -1,6 +1,5 @@
 package com.example.keepy.app.activity.homePageScreen;
 
-import static android.content.ContentValues.TAG;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -15,7 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,31 +21,20 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.keepy.ApiService;
 import com.example.keepy.R;
-import com.example.keepy.app.TokenRequest;
+
 import com.example.keepy.app.activity.kindergartenScreen.MainActivity;
-import com.example.keepy.app.activity.registerScreen.RegisterActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
+import com.example.keepy.app.activity.RegisterActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.messaging.FirebaseMessaging;
 
-import java.io.IOException;
+
 import java.util.ArrayList;
 
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomePageActivity extends AppCompatActivity {
 
@@ -109,26 +96,6 @@ public class HomePageActivity extends AppCompatActivity {
             }
         });
 
-        FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(new OnCompleteListener<String>() {
-                    @Override
-                    public void onComplete(@NonNull Task<String> task) {
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
-                            return;
-                        }
-
-                        // Get new FCM registration token
-                        String token = task.getResult();
-
-                        // Log and toast
-                        Log.d(TAG, "FCM Token: " + token);
-
-                        // Send token to your server
-                        sendTokenToServer(token);
-                    }
-                });
-
         // Set click listener for the ListView items
         kindergartenListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -168,7 +135,7 @@ public class HomePageActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("remember", "false");
                 editor.apply();
-                Intent intent = new Intent(HomePageActivity.this, RegisterActivity.class);
+                        Intent intent = new Intent(HomePageActivity.this, RegisterActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -187,56 +154,6 @@ public class HomePageActivity extends AppCompatActivity {
             notificationManager.createNotificationChannel(channel);
         }
     }
-    private void sendTokenToServer(String token) {
-        Retrofit retrofit = getRetrofitInstance();
-        ApiService apiService = retrofit.create(ApiService.class);
-
-        if (currentUserPhoneNumber != null && token != null) {
-            TokenRequest tokenRequest = new TokenRequest(currentUserPhoneNumber, token);
-
-            apiService.sendToken(tokenRequest).enqueue(new Callback<Void>() {
-                @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
-                    if (response.isSuccessful()) {
-                        Log.d(TAG, "Token sent successfully");
-                    } else {
-                        Log.e(TAG, "Error sending token: " + response.message());
-                        try {
-                            Log.e(TAG, "Error body: " + response.errorBody().string());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<Void> call, Throwable t) {
-                    t.printStackTrace();
-                    Log.e(TAG, "Error sending token", t);
-                }
-            });
-        } else {
-            Log.e(TAG, "currentUserPhoneNumber or token is null. Cannot send token to server.");
-        }
-    }
-
-
-    private Retrofit getRetrofitInstance() {
-
-        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(logging)
-                .build();
-
-        return new Retrofit.Builder()
-                .baseUrl("http://192.168.1.32:8080")
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-    }
-
     public String getCurrentUserPhoneNumber() {
         return currentUserPhoneNumber;
     }

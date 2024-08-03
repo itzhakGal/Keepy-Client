@@ -25,7 +25,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.keepy.NotificationActivity;
+import com.example.keepy.app.firebase.NotificationActivity;
 import com.example.keepy.R;
 import com.example.keepy.app.domain.KindergartenDetailsHelperClass;
 import com.google.firebase.database.DataSnapshot;
@@ -105,9 +105,6 @@ public class AddKindergartenActivity extends AppCompatActivity {
         ImageView imageView = findViewById(R.id.imageView5);
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         imageView.startAnimation(animation);
-        ImageView imageView1 = findViewById(R.id.imageView6);
-        Animation animation1 = AnimationUtils.loadAnimation(this, R.anim.fade_in);
-        imageView1.startAnimation(animation1);
     }
 
     private void createTestData() {
@@ -141,6 +138,7 @@ public class AddKindergartenActivity extends AppCompatActivity {
                 if (snapshot.exists()) {
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         KindergartenDetailsHelperClass kindergarten = dataSnapshot.getValue(KindergartenDetailsHelperClass.class);
+                        assert kindergarten != null;
                         if (kindergarten.getPassword().equals(password)) {
                             kindergartenNameET.setError(null);
                             kindergartenPasswordET.setError(null);

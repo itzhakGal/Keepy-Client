@@ -18,17 +18,17 @@
         android:textSize="50sp" />
 
     <TextView
-        android:id="@+id/keppy"
+        android:id="@+id/keepy"
         android:layout_width="wrap_content"
         android:layout_height="87dp"
-        android:text="to Keppy"
+        android:text="to Keepy"
         android:textSize="50sp" />
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="250sp"
         android:layout_height="250sp"
-        android:src="@drawable/logo" />
+        android:src="@drawable/lo" />
 
 
 </LinearLayout>

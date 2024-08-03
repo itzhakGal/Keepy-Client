@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@drawable/background"
-    tools:context=".app.kindergartenScreen.MainActivity">
+    tools:context=".app.activity.RegisterActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                 android:layout_height="150dp"
                 android:background="@drawable/rounded_image"
                 android:padding="10sp"
-                card_view:srcCompat="@drawable/logo" />
+                card_view:srcCompat="@drawable/lo" />
 
             <TextView
                 android:id="@+id/registerText"
