@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="?android:attr/colorBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@android:color/white"
+        android:elevation="4dp"
+        android:layout_margin="8dp"
+        android:divider="?android:attr/dividerHorizontal"
+        android:showDividers="middle">
+
+        <!-- Title and Message -->
+        <TextView
+            android:id="@+id/alertTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/primaryText"
+            android:drawablePadding="8dp"
+            android:paddingBottom="8dp"
+            app:drawableStartCompat="@drawable/ic_notification" />
+
+        <TextView
+            android:id="@+id/alertMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/secondaryText"
+            android:paddingBottom="8dp"/>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider"/>
+
+        <!-- Time -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="8dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_timestamp"
+                android:contentDescription="@string/time_icon"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/time"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/primaryText"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"/>
+
+            <TextView
+                android:id="@+id/timestamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/secondaryText"/>
+        </LinearLayout>
+
+        <!-- ID -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="8dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_event_type"
+                android:contentDescription="@string/id_icon"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/id"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/primaryText"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"/>
+
+            <TextView
+                android:id="@+id/alertID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/secondaryText"/>
+        </LinearLayout>
+
+        <!-- Event Type -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="8dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_event_type"
+                android:contentDescription="@string/event_type_icon"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/event_type"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/primaryText"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"/>
+
+            <TextView
+                android:id="@+id/eventType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/secondaryText"/>
+        </LinearLayout>
+
+        <!-- Kindergarten Name -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="8dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_children"
+                android:contentDescription="@string/kindergarten_icon"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kindergarten"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/primaryText"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"/>
+
+            <TextView
+                android:id="@+id/kindergartenName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/secondaryText"/>
+        </LinearLayout>
+
+        <!-- Word Detected (optional, hidden by default) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="8dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:id="@+id/iconDetails"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_message"
+                android:contentDescription="@string/word_icon"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
+                android:visibility="invisible"
+                tools:ignore="InvalidId" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/word_detected"
+                android:id="@+id/word_detected"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/primaryText"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
+                android:visibility="invisible"/>
+
+            <TextView
+                android:id="@+id/word"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/secondaryText"
+                android:visibility="invisible"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

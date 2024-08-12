@@ -26,20 +26,15 @@ import com.example.keepy.app.domain.UserDetailsHelperClass;
 import com.example.keepy.app.network.ApiService;
 import com.example.keepy.app.network.TokenRequest;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -89,10 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if (check) {
                     mAuth.signInAnonymously().addOnCompleteListener(RegisterActivity.this, task -> {
                         if (task.isSuccessful()) {
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            //saveUserToRealtimeDatabase(phoneNumber, fullName);
-                            //saveUserToFirestore(phoneNumber, fullName);
-                            insertNewUserToFirebase(phoneNumber, fullName, phoneNumber);
+                            saveUserToRealtimeDatabase(phoneNumber, fullName, phoneNumber);
                             currentUserPhoneNumber = phoneNumber;  // Set the currentUserPhoneNumber
                             sendToken();
                         } else {
@@ -158,7 +150,7 @@ public class RegisterActivity extends AppCompatActivity {
                 });
     }
 
-    private void insertNewUserToFirebase(String userId, String fullName, String phoneNumber) {
+    private void saveUserToRealtimeDatabase(String userId, String fullName, String phoneNumber) {
         database = FirebaseDatabase.getInstance("https://keppy-5ed11.firebaseio.com/");
         reference = database.getReference("users");
 
@@ -173,43 +165,6 @@ public class RegisterActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
-
-    private void saveUserToRealtimeDatabase(String userId, String fullName) {
-        database = FirebaseDatabase.getInstance("https://keppy-5ed11.firebaseio.com/");
-        reference = database.getReference("users");
-
-        UserDetailsHelperClass userDetailsHelperClass = new UserDetailsHelperClass(fullName, userId);
-        reference.child(userId).setValue(userDetailsHelperClass, (databaseError, databaseReference) -> {
-            if (databaseError != null) {
-                Toast.makeText(getApplicationContext(), "Error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(getApplicationContext(), "Data is valid in Realtime Database", Toast.LENGTH_SHORT).show();
-                // Optionally, navigate to HomePageActivity here if you want it to be triggered by Realtime Database save success
-            }
-        });
-    }
-
-    private void saveUserToFirestore(String userId, String fullName) {
-
-        Map<String,Object> user = new HashMap<>();
-        user.put("Phone Number", userId);
-        user.put("Full Name", fullName);
-
-        db.collection("users").document(userId)
-                .set(user)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(getApplicationContext(), "Data is valid in Firestore", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        Log.e(TAG, "Error saving user to Firestore", e); // Log the error for debugging
-                    }
-                });
     }
 
 

@@ -32,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="serif"
-                android:text="Add a new kindergarten"
+                android:text="@string/add_a_new_kindergarten"
                 android:textAlignment="center"
                 android:textColor="@color/colorRegister"
                 android:textSize="28sp"
@@ -99,19 +99,6 @@
                 android:textColor="@color/colorRegister"
                 tools:ignore="RtlHardcoded" />
 
-            <Button
-                android:id="@+id/buttonNotification"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/makeNotification"
-                android:fontFamily="casual"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="MissingConstraints" />
 
 
         </LinearLayout>
@@ -124,13 +111,14 @@
         android:orientation="horizontal"
         android:gravity="center">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageView5"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:foregroundTint="#A36E6E"
             android:padding="10sp"
-            card_view:srcCompat="@drawable/kindergarten5" />
+            card_view:srcCompat="@drawable/kindergarten5"
+            app:shapeAppearanceOverlay="@style/RoundedCornersImageView"/>
 
 
 

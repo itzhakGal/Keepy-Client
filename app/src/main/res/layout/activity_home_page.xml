@@ -86,21 +86,23 @@
         android:orientation="horizontal"
         android:gravity="center">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageView3"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:padding="10sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:shapeAppearanceOverlay="@style/RoundedCornersImageView"
             app:srcCompat="@drawable/kindergarten8"
-            tools:layout_editor_absoluteY="400dp" />
+            android:scaleType="centerCrop" />
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageView4"
             android:layout_width="200dp"
             android:layout_height="181dp"
-            app:srcCompat="@drawable/kindergarten7" />
+            app:shapeAppearanceOverlay="@style/RoundedCornersImageView"
+            app:srcCompat="@drawable/kindergarten7"
+            android:scaleType="centerCrop" />
+
     </LinearLayout>
 
         <Button
@@ -111,10 +113,17 @@
             android:text="Log out"
             android:textStyle="bold" />
 
-
-
+        <Button
+            android:id="@+id/showNewScreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Show new screens"
+            android:fontFamily="casual"
+            tools:layout_editor_absoluteX="164dp"
+            tools:layout_editor_absoluteY="539dp" />
 
     </LinearLayout>
+
 
 
 

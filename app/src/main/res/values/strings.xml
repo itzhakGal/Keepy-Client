@@ -35,5 +35,25 @@
     <string name="no_kindergartens_available">No kindergartens available</string>
     <string name="log_out">Log Out</string>
     <string name="makeNotification">make notification</string>
+    <string name="time_icon">Time Icon</string>
+    <string name="time">Time: </string>
+    <string name="id_icon">ID Icon</string>
+    <string name="id">ID:</string>
+    <string name="event_type_icon">Event Type Icon</string>
+    <string name="event_type">Event Type:  </string>
+    <string name="kindergarten_icon">Kindergarten Icon</string>
+    <string name="kindergarten">Kindergarten: </string>
+    <string name="word_icon">Word Icon</string>
+    <string name="word_detected">Word Detected: </string>
+    <string name="timestamp">Timestamp:  </string>
+    <string name="detected_word">Detected Word:  </string>
+    <string name="add_a_new_kindergarten">Add a new kindergarten </string>
+    <string name="good_morning">Good Morning,</string>
+    <string name="settings">Settings</string>
+    <string name="details">Details</string>
+    <string name="sound">Sound</string>
+    <string name="home">Home</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

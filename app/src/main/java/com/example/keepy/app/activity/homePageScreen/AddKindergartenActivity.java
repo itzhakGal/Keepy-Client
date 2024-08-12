@@ -1,12 +1,10 @@
 package com.example.keepy.app.activity.homePageScreen;
 
-import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,9 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
-import androidx.core.content.ContextCompat;
 
 import com.example.keepy.app.firebase.NotificationActivity;
 import com.example.keepy.R;
@@ -35,12 +31,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class AddKindergartenActivity extends AppCompatActivity {
 
     EditText kindergartenNameET, kindergartenPasswordET;
     Button addKindergartenButton;
     TextView textGoToHomePage;
-    Button buttonNotification;
     String currentUserPhoneNumber;
     DatabaseReference databaseReference;
 
@@ -48,14 +46,14 @@ public class AddKindergartenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_kindergarten);
-
         kindergartenNameET = findViewById(R.id.kindergartenName);
         kindergartenPasswordET = findViewById(R.id.Password);
         addKindergartenButton = findViewById(R.id.addKindergartenButton);
         textGoToHomePage = findViewById(R.id.textGoToHomePage);
         Intent intent = getIntent();
         currentUserPhoneNumber = intent.getStringExtra("currentUserPhoneNumber");
-        databaseReference = FirebaseDatabase.getInstance("https://keppy-5ed11.firebaseio.com/").getReference("users").child(currentUserPhoneNumber).child("MyKindergartens");
+        databaseReference = FirebaseDatabase.getInstance("https://keppy-5ed11.firebaseio.com/")
+                .getReference("users").child(currentUserPhoneNumber).child("MyKindergartens");
 
         imageAnimations();
 
@@ -66,22 +64,6 @@ public class AddKindergartenActivity extends AppCompatActivity {
                 intent.putExtra("currentUserPhoneNumber", currentUserPhoneNumber);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            }
-        });
-
-        buttonNotification = findViewById(R.id.buttonNotification);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            if (ContextCompat.checkSelfPermission(AddKindergartenActivity.this,
-                    Manifest.permission.RECEIVE_BOOT_COMPLETED) !=
-                    PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(AddKindergartenActivity.this,
-                        new String[]{Manifest.permission.RECEIVE_BOOT_COMPLETED}, 101);
-            }
-        }
-        buttonNotification.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                makeNotification();
             }
         });
 
@@ -123,7 +105,6 @@ public class AddKindergartenActivity extends AppCompatActivity {
         reference.child("tali").setValue(taliKindergarten);
     }
 
-
     public void checkDetails() {
         DatabaseReference reference = FirebaseDatabase.getInstance("https://keppy-5ed11.firebaseio.com/").getReference("kindergartens");
 
@@ -143,6 +124,7 @@ public class AddKindergartenActivity extends AppCompatActivity {
                             kindergartenNameET.setError(null);
                             kindergartenPasswordET.setError(null);
                             saveKindergartenDetails(kindergartenName, password);
+                            updateParentID(kindergartenName);
                             Toast.makeText(getApplicationContext(), "Kindergarten details are valid", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(AddKindergartenActivity.this, HomePageActivity.class);
                             intent.putExtra("kindergartenName", kindergartenName);
@@ -173,7 +155,6 @@ public class AddKindergartenActivity extends AppCompatActivity {
         // Check if the id already exists
         if (id != null) {
             databaseReference.child(id).setValue(kindergartenDetailsHelperClass);
-
             // Clear EditText fields
             kindergartenNameET.setText("");
             kindergartenPasswordET.setText("");
@@ -182,7 +163,22 @@ public class AddKindergartenActivity extends AppCompatActivity {
         }
     }
 
+    private void updateParentID(String kindergartenName) {
+        DatabaseReference kindergartenRef = FirebaseDatabase.getInstance("https://keppy-5ed11.firebaseio.com/").getReference("kindergartens").child(kindergartenName);
 
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("parentID", currentUserPhoneNumber);
+
+        kindergartenRef.child("parentID").setValue(currentUserPhoneNumber)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(this, "Parent ID updated successfully", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Failed to update Parent ID", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+    }
 
     public void makeNotification() {
         String channelID = "CHANNEL_ID_NOTIFICATION";
@@ -254,3 +250,4 @@ public class AddKindergartenActivity extends AppCompatActivity {
     }
 
 }
+

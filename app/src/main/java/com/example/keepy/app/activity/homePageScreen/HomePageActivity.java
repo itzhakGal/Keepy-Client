@@ -23,7 +23,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.keepy.R;
 
+
 import com.example.keepy.app.activity.kindergartenScreen.MainActivity;
+import com.example.keepy.app.activity.newScreens.MainActivity1;
 import com.google.firebase.FirebaseApp;
 import com.example.keepy.app.activity.RegisterActivity;
 import com.google.firebase.database.DataSnapshot;
@@ -44,6 +46,8 @@ public class HomePageActivity extends AppCompatActivity {
     ListView kindergartenListView;
     Button logoutButton;
 
+    Button showNewScreens;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +65,8 @@ public class HomePageActivity extends AppCompatActivity {
         kindergartenTextView = findViewById(R.id.textViewKindergartenHome);
         kindergartenListView = findViewById(R.id.listViewKindergartens);
         logoutButton = findViewById(R.id.logoutButton);
+        showNewScreens = findViewById(R.id.showNewScreen);
+
         FirebaseApp.initializeApp(this);
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://keppy-5ed11.firebaseio.com/").getReference("users")
@@ -93,15 +99,6 @@ public class HomePageActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Handle errors here
-            }
-        });
-
-        // Set click listener for the ListView items
-        kindergartenListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String selectedKindergarten = (String) parent.getItemAtPosition(position);
-                // Handle item click, you can navigate to a new activity or perform any action here
             }
         });
 
@@ -141,7 +138,15 @@ public class HomePageActivity extends AppCompatActivity {
             }
         });
 
-        createNotificationChannel();
+        showNewScreens.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("HomePageActivity", "Button clicked!");
+                Intent intent = new Intent(HomePageActivity.this, MainActivity1.class);
+                startActivity(intent);
+            }
+
+        });
 
 
     }

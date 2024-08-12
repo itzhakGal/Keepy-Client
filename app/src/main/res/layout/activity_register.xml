@@ -28,14 +28,14 @@
             android:orientation="vertical"
             android:padding="24dp">
 
-
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageView8"
                 android:layout_width="wrap_content"
                 android:layout_height="150dp"
                 android:background="@drawable/rounded_image"
                 android:padding="10sp"
-                card_view:srcCompat="@drawable/lo" />
+                card_view:srcCompat="@drawable/lo"
+                app:shapeAppearanceOverlay="@style/RoundedCornersImageView"/>
 
             <TextView
                 android:id="@+id/registerText"
@@ -56,7 +56,7 @@
                 android:layout_marginTop="40dp"
                 android:autofillHints=""
                 android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/ic_details"
+                android:drawableLeft="@drawable/ic_person"
                 android:drawablePadding="8dp"
                 android:hint="@string/full_name"
                 android:fontFamily="casual"
