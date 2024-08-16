@@ -109,7 +109,8 @@
             android:id="@+id/logoutButton"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:fontFamily="casual"
+            android:drawableTint="#7C5B5B"
+            android:fontFamily="@font/actor"
             android:text="Log out"
             android:textStyle="bold" />
 
@@ -118,7 +119,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Show new screens"
-            android:fontFamily="casual"
+            android:fontFamily="@font/actor"
             tools:layout_editor_absoluteX="164dp"
             tools:layout_editor_absoluteY="539dp" />
 

@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/aclonica"
-        android:text="Keepin An Eye Out"
+        android:text="Keeping An Eye Out"
         android:textColor="@color/colorRegister"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -68,34 +68,60 @@
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/ic_camera"
+        android:src="@drawable/ic_camera_black"
         android:contentDescription="Open Camera"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/sbSound"
         app:layout_constraintTop_toBottomOf="@id/waveformView"
         android:scaleType="centerInside" />
 
-    <!-- Event Type Text -->
+    <!-- Event Type Label -->
     <TextView
-        android:id="@+id/tvEventType"
+        android:id="@+id/tvEventTypeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Type: Inappropriate Sent"
+        android:fontFamily="@font/adlam_display"
+        android:text="Type Event:"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnPlayStop" />
 
-    <!-- Event Time Text -->
+    <!-- Dynamic Event Type Text -->
     <TextView
-        android:id="@+id/tvEventTime"
+        android:id="@+id/tvEventTypeValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text=""
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/tvEventTypeLabel"
+        app:layout_constraintTop_toBottomOf="@id/btnPlayStop" />
+
+    <!-- Event Time Label -->
+    <TextView
+        android:id="@+id/tvEventTimeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Time: 19.2.24 13:03:09"
+        android:fontFamily="@font/adlam_display"
+        android:text="Time:"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvEventType" />
+        app:layout_constraintTop_toBottomOf="@id/tvEventTypeLabel" />
+
+    <!-- Dynamic Event Time Text -->
+    <TextView
+        android:id="@+id/tvEventTimeValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:text=""
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/tvEventTimeLabel"
+        app:layout_constraintTop_toBottomOf="@id/tvEventTypeLabel" />
 
     <!-- More Events Section -->
     <LinearLayout
@@ -106,26 +132,28 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvEventTime"
-        android:background="@drawable/rounded_background"
+        app:layout_constraintTop_toBottomOf="@id/tvEventTimeLabel"
+        android:background="@drawable/rounded_background_event"
         android:padding="8dp">
 
         <!-- Event Description -->
         <TextView
-            android:id="@+id/tvMoreEvents"
-            android:layout_width="0dp"
+            android:id="@+id/tvMoreEventsLabel"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="More Events"
+            android:fontFamily="@font/adlam_display"
+            android:text="More Events:"
             android:textSize="16sp" />
 
-        <!-- Event Scroll Bar -->
-        <SeekBar
-            android:id="@+id/sbMoreEvents"
-            android:layout_width="150dp"
+        <!-- Event Spinner with larger touch target -->
+        <Spinner
+            android:id="@+id/spinnerMoreEvents"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:visibility="invisible"/>
+            android:minHeight="48dp"
+            android:layout_marginStart="16dp"
+            android:padding="12dp"
+            android:background="?attr/selectableItemBackgroundBorderless" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

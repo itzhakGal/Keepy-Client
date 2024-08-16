@@ -151,7 +151,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void saveUserToRealtimeDatabase(String userId, String fullName, String phoneNumber) {
-        database = FirebaseDatabase.getInstance("https://keppy-5ed11.firebaseio.com/");
+        database = FirebaseDatabase.getInstance("https://keepyapp-e4d50-default-rtdb.europe-west1.firebasedatabase.app/");
         reference = database.getReference("users");
 
         UserDetailsHelperClass userDetailsHelperClass = new UserDetailsHelperClass(fullName, phoneNumber);

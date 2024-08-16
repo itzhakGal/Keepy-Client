@@ -43,4 +43,3 @@ public class WaveformView extends View {
         }
     }
 }
-

@@ -1,14 +1,209 @@
-<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".app.activity.newScreens.DetailsFragment1">
+    tools:context=".app.activity.newScreens.DetailsFragment1"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- ConstraintLayout containing the UI components -->
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:padding="16dp">
+
+        <!-- Title Text -->
+        <TextView
+            android:id="@+id/tvTitleDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/aclonica"
+            android:text="Details:"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1"
+            android:shadowColor="@android:color/darker_gray"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/myColor"/>
+
+        <!-- Kindergarten Name Label -->
+        <TextView
+            android:id="@+id/tvKindergartenNameLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/kindergarten_name"
+            android:textSize="18sp"
+            android:fontFamily="@font/aclonica"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleDetails"
+            android:textColor="@color/myColor"/>
+
+        <!-- Dynamic Kindergarten Name TextView -->
+        <TextView
+            android:id="@+id/tvKindergartenNameValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/aclonica"
+            android:text="Tali"
+            android:textColor="@color/myColor"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/tvKindergartenNameLabel"
+            app:layout_constraintTop_toTopOf="@id/tvKindergartenNameLabel" />
+
+        <!-- Teacher Name Label -->
+        <TextView
+            android:id="@+id/tvKindergartenersPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/kindergartener_s_phone"
+            android:textSize="18sp"
+            android:fontFamily="@font/aclonica"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvKindergartenNameLabel"
+            android:textColor="@color/myColor"/>
+
+        <!-- Dynamic Teacher Name TextView -->
+        <TextView
+            android:id="@+id/tvKindergartenPhoneValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/aclonica"
+            android:textColor="@color/myColor"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/tvKindergartenersPhone"
+            app:layout_constraintTop_toTopOf="@id/tvKindergartenersPhone" />
+
+        <!-- Icons Row -->
+        <LinearLayout
+            android:id="@+id/iconsRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/tvKindergartenPhoneValue">
+
+            <ImageView
+                android:id="@+id/iconKidsDetails"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="16dp"
+                android:contentDescription="Kids"
+                android:src="@drawable/ic_kids"
+                android:elevation="4dp"
+                android:background="?attr/selectableItemBackgroundBorderless"/>
+
+            <ImageView
+                android:id="@+id/iconParentsDetails"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="16dp"
+                android:contentDescription="Parents"
+                android:src="@drawable/ic_parents"
+                android:elevation="4dp"
+                android:background="?attr/selectableItemBackgroundBorderless"/>
+
+            <ImageView
+                android:id="@+id/iconKindergartenDetails"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="16dp"
+                android:contentDescription="Kindergarten"
+                android:src="@drawable/ic_kindergarten"
+                android:elevation="4dp"
+                android:background="?attr/selectableItemBackgroundBorderless"/>
+        </LinearLayout>
+
+        <!-- Table Layout for Details -->
+        <TableLayout
+            android:id="@+id/tableLayoutDetails"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:stretchColumns="1"
+            android:background="@drawable/background_gradient"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iconsRow">
+
+            <!-- Header Row -->
+            <TableRow
+                android:background="@drawable/background_gradient"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/fo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/name"
+                    android:fontFamily="@font/adlam_display"
+                    android:textColor="#323030"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/address"
+                    android:fontFamily="@font/adlam_display"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="#323030" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/parent"
+                    android:fontFamily="@font/adlam_display"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="#323030" />
+            </TableRow>
+
+            <!-- Data Row 1 -->
+            <TableRow
+                android:background="@drawable/background_gradient"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="---"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="---------"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-----"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/black" />
+            </TableRow>
+
+            <!-- Add more rows as needed -->
+        </TableLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

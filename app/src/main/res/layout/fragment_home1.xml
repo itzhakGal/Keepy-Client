@@ -7,9 +7,9 @@
     android:padding="16dp"
     tools:context=".app.activity.newScreens.HomeFragment1">
 
-    <!-- Greeting Text -->
+    <!-- Good Morning Text -->
     <TextView
-        android:id="@+id/tvGreeting"
+        android:id="@+id/tvGoodMorning"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
@@ -17,6 +17,7 @@
         android:text="@string/good_morning"
         android:textColor="@color/myColor"
         android:textSize="24sp"
+        android:elevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,27 +32,28 @@
         android:fontFamily="@font/aclonica"
         android:text="@string/Username"
         android:textColor="@color/myColor"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvGreeting" />
+        app:layout_constraintTop_toBottomOf="@id/tvGoodMorning" />
 
     <!-- "Today KG" Text -->
     <TextView
-        android:id="@+id/tvTodayKG"
+        android:id="@+id/tvKindergartenNameHomeScreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="kindergarten name"
         android:fontFamily="@font/aclonica"
-        android:textSize="18sp"
+        android:text="kindergarten name"
+        android:textColor="@color/myColor"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/username"
-        android:textColor="@color/myColor"/>
+        app:layout_constraintTop_toBottomOf="@id/username" />
 
     <!-- Live Sound Section using the provided image -->
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ivLiveSound"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -59,11 +61,13 @@
         android:contentDescription="Live Sounds"
         android:scaleType="fitCenter"
         android:src="@drawable/sounds"
+        android:elevation="7dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTodayKG"
+        app:layout_constraintTop_toBottomOf="@id/tvKindergartenNameHomeScreen"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.8" />
+        app:layout_constraintWidth_percent="0.8"
+        app:shapeAppearanceOverlay="@style/RoundedCornersImageView"/>
 
     <!-- History Section Image -->
     <com.google.android.material.imageview.ShapeableImageView
@@ -72,7 +76,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:src="@drawable/history1"
+        android:src="@drawable/history"
         android:contentDescription="History Image"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toStartOf="@+id/ivChildren"
@@ -84,40 +88,41 @@
         app:shapeAppearanceOverlay="@style/RoundedCornersImageView"/>
 
     <!-- Children Section Image -->
+
+    <!-- Camera Picture Section -->
+
+
+    <!-- Flower Icon -->
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ivChildren"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
         android:layout_marginStart="8dp"
-        android:src="@drawable/kindergarten"
+        android:layout_marginTop="16dp"
         android:contentDescription="Children Image"
         android:scaleType="centerCrop"
-        app:layout_constraintStart_toEndOf="@id/ivHistory"
+        android:src="@drawable/kindergarten1"
+        app:layout_constraintDimensionRatio="H,1:1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivHistory"
         app:layout_constraintTop_toBottomOf="@id/ivLiveSound"
         app:layout_constraintWidth_percent="0.48"
-        app:layout_constraintDimensionRatio="H,1:1"
-        app:layout_constraintVertical_bias="0.5"
-        app:shapeAppearanceOverlay="@style/RoundedCornersImageView"/>
+        app:shapeAppearanceOverlay="@style/RoundedCornersImageView" />
 
-    <!-- Camera Picture Section -->
     <ImageView
         android:id="@+id/ivCameraPic"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/rounded_background"
+        android:scaleType="centerInside"
         android:src="@drawable/ic_camera"
+        android:elevation="7dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivChildren"
-        app:layout_constraintHorizontal_bias="0.5"
-        android:scaleType="centerInside" />
+        app:layout_constraintTop_toBottomOf="@id/ivChildren" />
 
-
-    <!-- Flower Icon -->
     <ImageView
         android:id="@+id/ivFlower"
         android:layout_width="51dp"

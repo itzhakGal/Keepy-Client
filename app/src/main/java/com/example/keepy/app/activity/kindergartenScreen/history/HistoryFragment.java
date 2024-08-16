@@ -57,7 +57,7 @@ public class HistoryFragment extends Fragment {
 
 
     private void fetchAlertHistory() {
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://keppy-5ed11.firebaseio.com/");
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://keepyapp-e4d50-default-rtdb.europe-west1.firebasedatabase.app/");
         DatabaseReference ref = database.getReference("kindergartens").child(kindergartenName).child("events");
 
         ref.addValueEventListener(new ValueEventListener() {

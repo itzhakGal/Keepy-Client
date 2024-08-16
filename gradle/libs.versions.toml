@@ -18,6 +18,7 @@ firebaseAuth = "23.0.0"
 googleGmsGoogleServices = "4.4.2"
 firebaseFirestore = "25.0.0"
 firebaseMessaging = "24.0.0"
+visualizer = "0.9.3"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }

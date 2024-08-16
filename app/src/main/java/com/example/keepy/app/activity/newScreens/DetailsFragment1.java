@@ -1,49 +1,32 @@
 package com.example.keepy.app.activity.newScreens;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.keepy.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DetailsFragment1#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class DetailsFragment1 extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String currentUserPhoneNumber;
+    private String kindergartenName;
 
     public DetailsFragment1() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DetailsFragment1.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static DetailsFragment1 newInstance(String param1, String param2) {
+    public static DetailsFragment1 newInstance(String currentUserPhoneNumber, String kindergartenName) {
         DetailsFragment1 fragment = new DetailsFragment1();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString("currentUserPhoneNumber", currentUserPhoneNumber);
+        args.putString("kindergartenName", kindergartenName);
         fragment.setArguments(args);
         return fragment;
     }
@@ -52,8 +35,8 @@ public class DetailsFragment1 extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            currentUserPhoneNumber = getArguments().getString("currentUserPhoneNumber");
+            kindergartenName = getArguments().getString("kindergartenName");
         }
     }
 
@@ -61,6 +44,44 @@ public class DetailsFragment1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_details1, container, false);
+        View view = inflater.inflate(R.layout.fragment_details1, container, false);
+
+        // Set up title and icons
+        TextView title = view.findViewById(R.id.tvTitleDetails);
+        title.setText("Keeping an Eye Out");
+
+        // You can dynamically set images or texts for the icons if needed
+        ImageView iconKids = view.findViewById(R.id.iconKidsDetails);
+        ImageView iconParents = view.findViewById(R.id.iconParentsDetails);
+        ImageView iconKindergarten = view.findViewById(R.id.iconKindergartenDetails);
+        TextView tvKindergartenName = view.findViewById(R.id.tvKindergartenNameValue);
+        TextView tvKindergartenersPhone = view.findViewById(R.id.tvKindergartenPhoneValue);
+
+        // Set up the kindergarten name and phone number
+        tvKindergartenName.setText(kindergartenName);
+        tvKindergartenersPhone.setText("0000000");
+
+        // Set up the table
+        TableLayout tableLayout = view.findViewById(R.id.tableLayoutDetails);
+
+        // Add more rows dynamically if needed
+        // This example adds a row dynamically (you can remove this part if not needed)
+        TableRow newRow = new TableRow(getContext());
+        TextView nameTextView = new TextView(getContext());
+        nameTextView.setText("Yoni");
+
+        TextView addressTextView = new TextView(getContext());
+        addressTextView.setText("Tel Aviv");
+
+        TextView parentTextView = new TextView(getContext());
+        parentTextView.setText("Sarah");
+
+        newRow.addView(nameTextView);
+        newRow.addView(addressTextView);
+        newRow.addView(parentTextView);
+
+        tableLayout.addView(newRow);
+
+        return view;
     }
 }

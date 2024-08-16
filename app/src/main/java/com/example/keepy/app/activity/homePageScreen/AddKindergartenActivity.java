@@ -52,7 +52,7 @@ public class AddKindergartenActivity extends AppCompatActivity {
         textGoToHomePage = findViewById(R.id.textGoToHomePage);
         Intent intent = getIntent();
         currentUserPhoneNumber = intent.getStringExtra("currentUserPhoneNumber");
-        databaseReference = FirebaseDatabase.getInstance("https://keppy-5ed11.firebaseio.com/")
+        databaseReference = FirebaseDatabase.getInstance("https://keepyapp-e4d50-default-rtdb.europe-west1.firebasedatabase.app/")
                 .getReference("users").child(currentUserPhoneNumber).child("MyKindergartens");
 
         imageAnimations();
@@ -90,7 +90,7 @@ public class AddKindergartenActivity extends AppCompatActivity {
     }
 
     private void createTestData() {
-        DatabaseReference reference = FirebaseDatabase.getInstance("https://keppy-5ed11.firebaseio.com/").getReference("kindergartens");
+        DatabaseReference reference = FirebaseDatabase.getInstance("https://keepyapp-e4d50-default-rtdb.europe-west1.firebasedatabase.app/").getReference("kindergartens");
 
         // Inserting the first kindergarten data
         KindergartenDetailsHelperClass orenKindergarten = new KindergartenDetailsHelperClass("oren", "55555");
@@ -106,7 +106,7 @@ public class AddKindergartenActivity extends AppCompatActivity {
     }
 
     public void checkDetails() {
-        DatabaseReference reference = FirebaseDatabase.getInstance("https://keppy-5ed11.firebaseio.com/").getReference("kindergartens");
+        DatabaseReference reference = FirebaseDatabase.getInstance("https://keepyapp-e4d50-default-rtdb.europe-west1.firebasedatabase.app/").getReference("kindergartens");
 
         String kindergartenName = kindergartenNameET.getText().toString().trim();
         String password = kindergartenPasswordET.getText().toString().trim();
@@ -164,7 +164,7 @@ public class AddKindergartenActivity extends AppCompatActivity {
     }
 
     private void updateParentID(String kindergartenName) {
-        DatabaseReference kindergartenRef = FirebaseDatabase.getInstance("https://keppy-5ed11.firebaseio.com/").getReference("kindergartens").child(kindergartenName);
+        DatabaseReference kindergartenRef = FirebaseDatabase.getInstance("https://keepyapp-e4d50-default-rtdb.europe-west1.firebasedatabase.app/").getReference("kindergartens").child(kindergartenName);
 
         Map<String, Object> updates = new HashMap<>();
         updates.put("parentID", currentUserPhoneNumber);
@@ -180,42 +180,7 @@ public class AddKindergartenActivity extends AppCompatActivity {
 
     }
 
-    public void makeNotification() {
-        String channelID = "CHANNEL_ID_NOTIFICATION";
-        NotificationCompat.Builder builder =
-                new NotificationCompat.Builder(getApplicationContext(), channelID);
-        builder.setSmallIcon(R.drawable.ic_notification);
-        builder.setContentTitle("Notification Title");
-        builder.setContentText("Some text for notification here")
-                .setAutoCancel(true)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
-        Intent intent = new Intent(getApplicationContext(), NotificationActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra("data", "some value to be passed here");
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),
-                0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE); // Add FLAG_IMMUTABLE
-        builder.setContentIntent(pendingIntent);
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel notificationChannel =
-                    notificationManager.getNotificationChannel(channelID);
-            if (notificationChannel == null) {
-                int importance = NotificationManager.IMPORTANCE_HIGH;
-                notificationChannel = new NotificationChannel(channelID,
-                        "Keepy Notifications", importance);
-                notificationChannel.setDescription("Notifications for Keepy app");
-                notificationChannel.setLightColor(Color.GREEN);
-                notificationChannel.enableVibration(true);
-                notificationManager.createNotificationChannel(notificationChannel);
-            }
-        }
-
-        notificationManager.notify(0, builder.build());
-    }
 
     private boolean validationInfo(String kindergartenName, String password) {
         if (isFieldEmpty(kindergartenName, kindergartenNameET)) {

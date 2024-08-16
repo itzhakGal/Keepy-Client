@@ -69,7 +69,7 @@ public class HomePageActivity extends AppCompatActivity {
 
         FirebaseApp.initializeApp(this);
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://keppy-5ed11.firebaseio.com/").getReference("users")
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://keepyapp-e4d50-default-rtdb.europe-west1.firebasedatabase.app/").getReference("users")
                 .child(currentUserPhoneNumber).child("MyKindergartens");
 
         // Initially hide both TextView and ListView
@@ -118,7 +118,7 @@ public class HomePageActivity extends AppCompatActivity {
                 String selectedKindergarten = (String) parent.getItemAtPosition(position);
 
                 // Start MainActivity and pass selected kindergarten name and user phone number
-                Intent intent = new Intent(HomePageActivity.this, MainActivity.class);
+                Intent intent = new Intent(HomePageActivity.this, MainActivity1.class);
                 intent.putExtra("kindergartenName", selectedKindergarten);
                 intent.putExtra("currentUserPhoneNumber", currentUserPhoneNumber);
                 startActivity(intent);
@@ -150,15 +150,7 @@ public class HomePageActivity extends AppCompatActivity {
 
 
     }
-    private void createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            String channelId = getString(R.string.default_notification_channel_id);
-            String channelName = "Default Channel";
-            NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT);
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
-    }
+
     public String getCurrentUserPhoneNumber() {
         return currentUserPhoneNumber;
     }

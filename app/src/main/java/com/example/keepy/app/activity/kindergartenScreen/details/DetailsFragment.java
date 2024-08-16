@@ -39,7 +39,7 @@ public class DetailsFragment extends Fragment {
     }
 
     private void initializeMediaPlayerAndVisualizer() {
-        mediaPlayer = MediaPlayer.create(getContext(), R.raw.sample_audio);
+        mediaPlayer = MediaPlayer.create(getContext(), R.raw.your_audio_file);
         mediaPlayer.setLooping(true);
 
         setupVisualizer();

@@ -50,8 +50,8 @@ dependencies {
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.messaging)
 
-
     implementation ("com.google.android.material:material:1.5.0")
+
 
     // Retrofit and Gson dependencies
     implementation("com.squareup.retrofit2:retrofit:2.9.0")

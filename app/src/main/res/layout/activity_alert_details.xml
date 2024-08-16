@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="?android:attr/colorBackground">
+    android:background="@drawable/background_gradient">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,6 +27,7 @@
             android:textStyle="bold"
             android:textSize="20sp"
             android:textColor="@color/primaryText"
+            android:fontFamily="@font/adlam_display"
             android:drawablePadding="8dp"
             android:paddingBottom="8dp"
             app:drawableStartCompat="@drawable/ic_notification" />
@@ -36,6 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
+            android:fontFamily="@font/adlam_display"
             android:textColor="@color/secondaryText"
             android:paddingBottom="8dp"/>
 
@@ -67,6 +69,7 @@
                 android:textStyle="bold"
                 android:textSize="16sp"
                 android:textColor="@color/primaryText"
+                android:fontFamily="@font/adlam_display"
                 android:paddingEnd="8dp"
                 android:paddingStart="8dp"/>
 
@@ -74,42 +77,11 @@
                 android:id="@+id/timestamp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/adlam_display"
                 android:textSize="16sp"
                 android:textColor="@color/secondaryText"/>
         </LinearLayout>
 
-        <!-- ID -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="8dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_event_type"
-                android:contentDescription="@string/id_icon"
-                android:paddingEnd="8dp"
-                android:paddingStart="8dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/id"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="@color/primaryText"
-                android:paddingEnd="8dp"
-                android:paddingStart="8dp"/>
-
-            <TextView
-                android:id="@+id/alertID"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="@color/secondaryText"/>
-        </LinearLayout>
 
         <!-- Event Type -->
         <LinearLayout
@@ -130,6 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/event_type"
+                android:fontFamily="@font/adlam_display"
                 android:textStyle="bold"
                 android:textSize="16sp"
                 android:textColor="@color/primaryText"
@@ -140,6 +113,7 @@
                 android:id="@+id/eventType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/adlam_display"
                 android:textSize="16sp"
                 android:textColor="@color/secondaryText"/>
         </LinearLayout>
@@ -163,6 +137,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/kindergarten"
+                android:fontFamily="@font/adlam_display"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/primaryText"
@@ -173,6 +148,7 @@
                 android:id="@+id/kindergartenName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/adlam_display"
                 android:textSize="16sp"
                 android:textColor="@color/secondaryText"/>
         </LinearLayout>
@@ -202,6 +178,7 @@
                 android:id="@+id/word_detected"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:fontFamily="@font/adlam_display"
                 android:textColor="@color/primaryText"
                 android:paddingEnd="8dp"
                 android:paddingStart="8dp"
@@ -212,6 +189,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
+                android:fontFamily="@font/adlam_display"
                 android:textColor="@color/secondaryText"
                 android:visibility="invisible"/>
         </LinearLayout>
