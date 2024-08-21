@@ -48,13 +48,12 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewH
 
         holder.tvEventDescription.setText(event.getEventType());
         holder.tvEventDateTime.setText(event.getDateTime());
-
+        holder.tvWordOrSentence.setVisibility(View.VISIBLE);
         // Set the word or sentence if available
         if (event.getDescription() != null) {
-            holder.tvWordOrSentence.setVisibility(View.VISIBLE);
             holder.tvWordOrSentence.setText("Details: " + event.getDescription());
         } else {
-            holder.tvWordOrSentence.setVisibility(View.GONE);
+            holder.tvWordOrSentence.setText("Details: Crying detected in kindergarten" );;
         }
     }
 

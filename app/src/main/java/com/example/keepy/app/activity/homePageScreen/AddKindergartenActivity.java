@@ -1,12 +1,6 @@
 package com.example.keepy.app.activity.homePageScreen;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -19,9 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 
-import com.example.keepy.app.firebase.NotificationActivity;
 import com.example.keepy.R;
 import com.example.keepy.app.domain.KindergartenDetailsHelperClass;
 import com.google.firebase.database.DataSnapshot;
@@ -50,6 +42,7 @@ public class AddKindergartenActivity extends AppCompatActivity {
         kindergartenPasswordET = findViewById(R.id.Password);
         addKindergartenButton = findViewById(R.id.addKindergartenButton);
         textGoToHomePage = findViewById(R.id.textGoToHomePage);
+        //createTestData();
         Intent intent = getIntent();
         currentUserPhoneNumber = intent.getStringExtra("currentUserPhoneNumber");
         databaseReference = FirebaseDatabase.getInstance("https://keepyapp-e4d50-default-rtdb.europe-west1.firebasedatabase.app/")

@@ -1,34 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    android:gravity="center"
-    android:orientation="vertical"
-    tools:context=".app.activity.kindergartenScreen.home.HomeFragment">
+    android:padding="16dp"
+    tools:context=".app.activity.kindergartenScreens.HomeFragment">
 
+    <!-- Username Text -->
+    <TextView
+        android:id="@+id/tvGoodMorning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:elevation="8dp"
+        android:fontFamily="@font/aclonica"
+        android:text="@string/good_morning"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/Welcome"
+        android:id="@+id/username"
         android:layout_width="wrap_content"
-        android:layout_height="87dp"
-        android:text="Welcome"
-        android:textSize="50sp" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/aclonica"
+        android:text="Galia"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvGoodMorning" />
 
+    <!-- "Today KG" Text -->
     <TextView
-        android:id="@+id/keepy"
+        android:id="@+id/tvKindergartenNameHomeScreen"
         android:layout_width="wrap_content"
-        android:layout_height="87dp"
-        android:text="to Keepy"
-        android:textSize="50sp" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/aclonica"
+        android:text="Tali's Kindergarten"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/username" />
+
+
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivLiveSound"
+        android:layout_width="350dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="Live Sounds"
+        android:src="@drawable/hear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvKindergartenNameHomeScreen"
+        app:layout_constraintWidth_default="percent" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivHistory"
+        android:layout_width="212dp"
+        android:layout_height="173dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="History Image"
+        android:scaleType="centerCrop"
+        android:src="@drawable/alertshistory"
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintEnd_toStartOf="@+id/ivChildren"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivLiveSound"
+        app:layout_constraintWidth_percent="0.48" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivChildren"
+        android:layout_width="140dp"
+        android:layout_height="155dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="Children Image"
+        android:scaleType="centerCrop"
+        android:src="@drawable/about"
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivHistory"
+        app:layout_constraintTop_toBottomOf="@id/ivLiveSound"
+        app:layout_constraintWidth_percent="0.48"
+        app:shapeAppearanceOverlay="@style/RoundedCornersImageView" />
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="250sp"
-        android:layout_height="250sp"
-        android:src="@drawable/lo" />
+        android:id="@+id/ivCameraPic"
+        android:layout_width="187dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="20dp"
+        android:elevation="7dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/camera"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.546"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivChildren" />
+
+    <ImageView
+        android:id="@+id/ivFlower"
+        android:layout_width="51dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_flower"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.963"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvGoToAllKindergartenScreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/adlam_display"
+        android:gravity="center"
+        android:text="Go to all my kindergartens"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.53"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivCameraPic"
+        app:layout_constraintVertical_bias="0.225" />
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

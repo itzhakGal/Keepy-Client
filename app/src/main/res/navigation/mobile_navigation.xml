@@ -3,27 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
-    <fragment
-        android:id="@+id/nav_home"
-        android:name="com.example.keepy.app.activity.kindergartenScreen.home.HomeFragment"
-        android:label="Home"
-        tools:layout="@layout/fragment_home"/>
-    <fragment
-        android:id="@+id/nav_details"
-        android:name="com.example.keepy.app.activity.kindergartenScreen.details.DetailsFragment"
-        android:label="@string/menu_details"
-        tools:layout="@layout/fragment_details" />
+    app:startDestination="@+id/navigation_home">
 
     <fragment
-        android:id="@+id/nav_history"
-        android:name="com.example.keepy.app.activity.kindergartenScreen.history.HistoryFragment"
-        android:label="@string/menu_history"
-        tools:layout="@layout/fragment_history" />
+        android:id="@+id/navigation_home"
+        android:name="com.example.keepy.app.activity.kindergartenScreens.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_camera"
-        android:name="com.example.keepy.app.activity.kindergartenScreen.camera.CameraFragment"
-        android:label="@string/menu_camera"
+        android:id="@+id/navigation_sound"
+        android:name="com.example.keepy.app.activity.kindergartenScreens.SoundFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_sounds" />
+
+    <fragment
+        android:id="@+id/navigation_details"
+        android:name="com.example.keepy.app.activity.kindergartenScreens.DetailsFragment"
+        android:label="@string/title_notifications"
+            tools:layout="@layout/fragment_details" />
+
+    <fragment
+        android:id="@+id/navigation_camera"
+        android:name="com.example.keepy.app.activity.kindergartenScreens.CameraFragment"
+        android:label="@string/title_notifications"
         tools:layout="@layout/fragment_camera" />
 </navigation>

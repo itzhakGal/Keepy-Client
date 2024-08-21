@@ -51,13 +51,17 @@ dependencies {
     implementation(libs.firebase.messaging)
 
     implementation ("com.google.android.material:material:1.5.0")
-
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation ("com.airbnb.android:lottie:5.2.0")
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation ("io.github.gautamchibde:audiovisualizer:2.2.7")
 
     // Retrofit and Gson dependencies
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:okhttp:4.9.2")
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.2")
+    implementation(libs.firebase.storage)
 
     // Testing dependencies
     testImplementation(libs.junit)

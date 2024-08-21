@@ -1,13 +1,9 @@
 package com.example.keepy.app.activity.homePageScreen;
 
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,9 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.keepy.R;
 
-
-import com.example.keepy.app.activity.kindergartenScreen.MainActivity;
-import com.example.keepy.app.activity.newScreens.MainActivity1;
+import com.example.keepy.app.activity.kindergartenScreens.MainActivity;
 import com.google.firebase.FirebaseApp;
 import com.example.keepy.app.activity.RegisterActivity;
 import com.google.firebase.database.DataSnapshot;
@@ -46,8 +40,6 @@ public class HomePageActivity extends AppCompatActivity {
     ListView kindergartenListView;
     Button logoutButton;
 
-    Button showNewScreens;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +57,6 @@ public class HomePageActivity extends AppCompatActivity {
         kindergartenTextView = findViewById(R.id.textViewKindergartenHome);
         kindergartenListView = findViewById(R.id.listViewKindergartens);
         logoutButton = findViewById(R.id.logoutButton);
-        showNewScreens = findViewById(R.id.showNewScreen);
 
         FirebaseApp.initializeApp(this);
 
@@ -118,7 +109,7 @@ public class HomePageActivity extends AppCompatActivity {
                 String selectedKindergarten = (String) parent.getItemAtPosition(position);
 
                 // Start MainActivity and pass selected kindergarten name and user phone number
-                Intent intent = new Intent(HomePageActivity.this, MainActivity1.class);
+                Intent intent = new Intent(HomePageActivity.this, MainActivity.class);
                 intent.putExtra("kindergartenName", selectedKindergarten);
                 intent.putExtra("currentUserPhoneNumber", currentUserPhoneNumber);
                 startActivity(intent);
@@ -137,17 +128,6 @@ public class HomePageActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-        showNewScreens.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("HomePageActivity", "Button clicked!");
-                Intent intent = new Intent(HomePageActivity.this, MainActivity1.class);
-                startActivity(intent);
-            }
-
-        });
-
 
     }
 

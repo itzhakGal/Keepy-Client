@@ -1,4 +1,4 @@
-package com.example.keepy.app.activity.newScreens;
+package com.example.keepy.app.activity.kindergartenScreens;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,17 +13,17 @@ import androidx.fragment.app.Fragment;
 
 import com.example.keepy.R;
 
-public class DetailsFragment1 extends Fragment {
+public class DetailsFragment extends Fragment {
 
     private String currentUserPhoneNumber;
     private String kindergartenName;
 
-    public DetailsFragment1() {
+    public DetailsFragment() {
         // Required empty public constructor
     }
 
-    public static DetailsFragment1 newInstance(String currentUserPhoneNumber, String kindergartenName) {
-        DetailsFragment1 fragment = new DetailsFragment1();
+    public static DetailsFragment newInstance(String currentUserPhoneNumber, String kindergartenName) {
+        DetailsFragment fragment = new DetailsFragment();
         Bundle args = new Bundle();
         args.putString("currentUserPhoneNumber", currentUserPhoneNumber);
         args.putString("kindergartenName", kindergartenName);
@@ -44,7 +44,7 @@ public class DetailsFragment1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_details1, container, false);
+        View view = inflater.inflate(R.layout.fragment_details, container, false);
 
         // Set up title and icons
         TextView title = view.findViewById(R.id.tvTitleDetails);

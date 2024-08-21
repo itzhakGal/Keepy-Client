@@ -1,4 +1,4 @@
-package com.example.keepy.app.activity.newScreens;
+package com.example.keepy.app.activity.kindergartenScreens;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.example.keepy.R;
 import com.example.keepy.app.adapter.EventsAdapter;
@@ -22,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HistoryFragment1 extends Fragment {
+public class HistoryFragment extends Fragment {
 
     private static final String ARG_PHONE_NUMBER = "currentUserPhoneNumber";
     private static final String ARG_KIND_NAME = "kindergartenName";
@@ -34,12 +37,14 @@ public class HistoryFragment1 extends Fragment {
     private EventsAdapter eventsAdapter;
     private List<Event> eventsList;
 
-    public HistoryFragment1() {
+    private Spinner spinnerEventType;
+
+    public HistoryFragment() {
         // Required empty public constructor
     }
 
-    public static HistoryFragment1 newInstance(String currentUserPhoneNumber, String kindergartenName) {
-        HistoryFragment1 fragment = new HistoryFragment1();
+    public static HistoryFragment newInstance(String currentUserPhoneNumber, String kindergartenName) {
+        HistoryFragment fragment = new HistoryFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PHONE_NUMBER, currentUserPhoneNumber);
         args.putString(ARG_KIND_NAME, kindergartenName);
@@ -59,8 +64,7 @@ public class HistoryFragment1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_history1, container, false);
+        View view = inflater.inflate(R.layout.fragment_history, container, false);
 
         // Initialize RecyclerView
         recyclerView = view.findViewById(R.id.recyclerViewEvents);
@@ -71,13 +75,40 @@ public class HistoryFragment1 extends Fragment {
         eventsAdapter = new EventsAdapter(eventsList);
         recyclerView.setAdapter(eventsAdapter);
 
-        // Fetch events from Firebase
-        fetchEventsFromFirebase();
+        // Initialize Spinner
+        spinnerEventType = view.findViewById(R.id.spinnerEventType);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.event_types, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerEventType.setAdapter(adapter);
+
+        // Fetch all events initially
+        fetchEventsFromFirebase("All Events");
+
+        // Set listener for Spinner selection
+        spinnerEventType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // Filter events only if a specific type is selected
+                String selectedEventType = spinnerEventType.getSelectedItem().toString();
+                if (!selectedEventType.equals("All Events")) {
+                    fetchEventsFromFirebase(selectedEventType);
+                } else {
+                    // If "All Events" is selected, fetch all events again
+                    fetchEventsFromFirebase("All Events");
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Do nothing
+            }
+        });
 
         return view;
     }
 
-    private void fetchEventsFromFirebase() {
+    private void fetchEventsFromFirebase(String eventTypeFilter) {
         DatabaseReference eventsRef = FirebaseDatabase.getInstance("https://keepyapp-e4d50-default-rtdb.europe-west1.firebasedatabase.app/")
                 .getReference("kindergartens")
                 .child(kindergartenName)
@@ -86,7 +117,7 @@ public class HistoryFragment1 extends Fragment {
         eventsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                eventsList.clear(); // Clear the list before adding new data
+                eventsList.clear();
                 for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
                     String eventType = eventSnapshot.child("event").getValue(String.class);
                     String description = eventSnapshot.child("sentence").exists()
@@ -95,10 +126,13 @@ public class HistoryFragment1 extends Fragment {
                     String dateTime = eventSnapshot.child("timestamp").getValue(String.class);
                     String id = eventSnapshot.child("id").getValue(String.class);
 
-                    Event event = new Event(eventType, description, dateTime, id);
-                    eventsList.add(event);
+                    // If the filter is "All Events" or matches the selected event type, add the event to the list
+                    if (eventTypeFilter.equals("All Events") || eventTypeFilter.equals(eventType)) {
+                        Event event = new Event(eventType, description, dateTime, id);
+                        eventsList.add(event);
+                    }
                 }
-                eventsAdapter.notifyDataSetChanged(); // Notify adapter of data changes
+                eventsAdapter.notifyDataSetChanged();
             }
 
             @Override

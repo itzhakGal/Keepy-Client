@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".app.activity.kindergartenScreens.SettingsFragment">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="405dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/myColor"
+        android:fontFamily="@font/adlam_display"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:text="Settings:"
+        android:textSize="34sp"
+        android:textStyle="bold" />
+</FrameLayout>

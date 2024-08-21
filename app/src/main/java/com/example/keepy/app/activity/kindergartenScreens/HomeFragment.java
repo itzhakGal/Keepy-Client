@@ -1,5 +1,6 @@
-package com.example.keepy.app.activity.newScreens;
+package com.example.keepy.app.activity.kindergartenScreens;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -10,24 +11,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.keepy.R;
+import com.example.keepy.app.activity.homePageScreen.AddKindergartenActivity;
+import com.example.keepy.app.activity.homePageScreen.HomePageActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class HomeFragment1 extends Fragment {
+public class HomeFragment extends Fragment {
 
     private String currentUserPhoneNumber;
     private String kindergartenName;
     private DatabaseReference databaseReference;
 
-    public HomeFragment1() {
+    public HomeFragment() {
         // Required empty public constructor
     }
 
-    public static HomeFragment1 newInstance(String currentUserPhoneNumber, String kindergartenName) {
-        HomeFragment1 fragment = new HomeFragment1();
+    public static HomeFragment newInstance(String currentUserPhoneNumber, String kindergartenName) {
+        HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
         args.putString("currentUserPhoneNumber", currentUserPhoneNumber);
         args.putString("kindergartenName", kindergartenName);
@@ -52,7 +55,7 @@ public class HomeFragment1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home1, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         // Initialize UI components
         TextView tvUsername = view.findViewById(R.id.username);
@@ -62,6 +65,7 @@ public class HomeFragment1 extends Fragment {
         ImageView ivChildren = view.findViewById(R.id.ivChildren);
         ImageView ivCameraPic = view.findViewById(R.id.ivCameraPic);
         ImageView ivFlower = view.findViewById(R.id.ivFlower);
+        TextView   tvGoToAllKindergartenScreen = view.findViewById(R.id.tvGoToAllKindergartenScreen);
 
         // Set the dynamic values for the TextViews
         tvKindergartenName.setText(kindergartenName); // Display the kindergarten name
@@ -84,7 +88,7 @@ public class HomeFragment1 extends Fragment {
         ivHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HistoryFragment1 historyFragment = HistoryFragment1.newInstance(currentUserPhoneNumber, kindergartenName);
+                HistoryFragment historyFragment = HistoryFragment.newInstance(currentUserPhoneNumber, kindergartenName);
                 getParentFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, historyFragment)
                         .addToBackStack(null)
@@ -95,7 +99,7 @@ public class HomeFragment1 extends Fragment {
         ivChildren.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DetailsFragment1 detailsFragment = DetailsFragment1.newInstance(currentUserPhoneNumber, kindergartenName);
+                DetailsFragment detailsFragment = DetailsFragment.newInstance(currentUserPhoneNumber, kindergartenName);
                 getParentFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, detailsFragment)
                         .addToBackStack(null)
@@ -106,13 +110,23 @@ public class HomeFragment1 extends Fragment {
         ivCameraPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CameraFragment1 cameraFragment = CameraFragment1.newInstance(currentUserPhoneNumber, kindergartenName);
+                CameraFragment cameraFragment = CameraFragment.newInstance(currentUserPhoneNumber, kindergartenName);
                 getParentFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, cameraFragment)
                         .addToBackStack(null)
                         .commit();
             }
         });
+
+        tvGoToAllKindergartenScreen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), HomePageActivity.class);
+                intent.putExtra("currentUserPhoneNumber", currentUserPhoneNumber);
+                startActivity(intent);
+            }
+        });
+
 
         return view;
     }

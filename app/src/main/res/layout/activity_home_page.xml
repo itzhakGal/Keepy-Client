@@ -91,16 +91,17 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:padding="10sp"
+            android:scaleType="centerCrop"
+            android:visibility="visible"
             app:shapeAppearanceOverlay="@style/RoundedCornersImageView"
-            app:srcCompat="@drawable/kindergarten8"
-            android:scaleType="centerCrop" />
+            app:srcCompat="@drawable/kindergarten8" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageView4"
             android:layout_width="200dp"
             android:layout_height="181dp"
             app:shapeAppearanceOverlay="@style/RoundedCornersImageView"
-            app:srcCompat="@drawable/kindergarten7"
+            app:srcCompat="@drawable/kindergarten9"
             android:scaleType="centerCrop" />
 
     </LinearLayout>
@@ -113,15 +114,6 @@
             android:fontFamily="@font/actor"
             android:text="Log out"
             android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/showNewScreen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Show new screens"
-            android:fontFamily="@font/actor"
-            tools:layout_editor_absoluteX="164dp"
-            tools:layout_editor_absoluteY="539dp" />
 
     </LinearLayout>
 

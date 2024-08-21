@@ -1,4 +1,4 @@
-package com.example.keepy.app.activity.newScreens;
+package com.example.keepy.app.activity.kindergartenScreens;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,19 +12,19 @@ import androidx.fragment.app.Fragment;
 
 import com.example.keepy.R;
 
-public class CameraFragment1 extends Fragment {
+public class CameraFragment extends Fragment {
 
     private String currentUserPhoneNumber;
     private String kindergartenName;
     private VideoView videoView;
     private ImageButton btnPlay, btnPause, btnRestart;
 
-    public CameraFragment1() {
+    public CameraFragment() {
         // Required empty public constructor
     }
 
-    public static CameraFragment1 newInstance(String currentUserPhoneNumber, String kindergartenName) {
-        CameraFragment1 fragment = new CameraFragment1();
+    public static CameraFragment newInstance(String currentUserPhoneNumber, String kindergartenName) {
+        CameraFragment fragment = new CameraFragment();
         Bundle args = new Bundle();
         args.putString("currentUserPhoneNumber", currentUserPhoneNumber);
         args.putString("kindergartenName", kindergartenName);
@@ -45,7 +45,7 @@ public class CameraFragment1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_camera1, container, false);
+        View view = inflater.inflate(R.layout.fragment_camera, container, false);
 
         // Initialize VideoView and ImageButtons
         videoView = view.findViewById(R.id.videoView);
