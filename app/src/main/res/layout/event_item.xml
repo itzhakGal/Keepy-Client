@@ -1,0 +1,114 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_background_eventdetails"
+    android:padding="16dp"
+    android:elevation="6dp"
+    android:layout_margin="0dp"> <!-- Ensure no margin is causing the border effect -->
+
+    <!-- Event Icon -->
+<ImageView
+android:id="@+id/ivEventIcon"
+android:layout_width="40dp"
+android:layout_height="40dp"
+android:contentDescription="Event Icon"
+app:layout_constraintTop_toTopOf="parent"
+app:layout_constraintBottom_toBottomOf="parent"
+app:layout_constraintStart_toStartOf="parent"
+android:layout_marginStart="8dp" />
+
+    <!-- Event Description Label -->
+<TextView
+android:id="@+id/tvEventDescriptionLabel"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:fontFamily="@font/chewy"
+android:letterSpacing="0.05"
+android:text="Event: "
+android:textColor="@color/black"
+android:textSize="14sp"
+android:lineSpacingMultiplier="1.2"
+android:paddingTop="4dp"
+android:paddingBottom="6dp"
+app:layout_constraintTop_toTopOf="parent"
+app:layout_constraintStart_toEndOf="@id/ivEventIcon"
+android:layout_marginStart="8dp" />
+
+    <!-- Dynamic Event Description -->
+<TextView
+android:id="@+id/tvEventDescription"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:fontFamily="@font/chewy"
+android:letterSpacing="0.05"
+android:text=""
+android:textColor="@color/black"
+android:textSize="13sp"
+android:ellipsize="end"
+android:maxLines="2"
+android:lineSpacingMultiplier="1.2"
+android:paddingTop="4dp"
+android:paddingBottom="6dp"
+app:layout_constraintTop_toTopOf="@id/tvEventDescriptionLabel"
+app:layout_constraintStart_toEndOf="@id/tvEventDescriptionLabel"
+app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Word/Sentence TextView aligned with Event Label -->
+<TextView
+android:id="@+id/tvWordOrSentence"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:fontFamily="@font/chewy"
+android:letterSpacing="0.05"
+android:text=""
+android:textColor="@color/black"
+android:textSize="14sp"
+android:ellipsize="end"
+android:maxLines="2"
+android:lineSpacingMultiplier="1.2"
+android:paddingTop="4dp"
+android:paddingBottom="6dp"
+app:layout_constraintTop_toBottomOf="@id/tvEventDescriptionLabel"
+app:layout_constraintStart_toStartOf="@id/tvEventDescriptionLabel"
+android:layout_marginTop="8dp"
+android:layout_marginBottom="8dp"
+app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Time Label -->
+<TextView
+android:id="@+id/tvEventTimeLabel"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:fontFamily="@font/chewy"
+android:letterSpacing="0.05"
+android:text="Time: "
+android:textColor="@color/black"
+android:textSize="14sp"
+android:lineSpacingMultiplier="1.2"
+android:paddingTop="4dp"
+android:paddingBottom="6dp"
+app:layout_constraintTop_toBottomOf="@id/tvWordOrSentence"
+app:layout_constraintStart_toStartOf="@id/tvWordOrSentence"
+android:layout_marginTop="8dp" />
+
+    <!-- Dynamic Event Date and Time -->
+<TextView
+android:id="@+id/tvEventDateTime"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:fontFamily="@font/chewy"
+android:letterSpacing="0.05"
+android:text=""
+android:textSize="14sp"
+android:textColor="@color/black"
+android:maxLines="1"
+android:lineSpacingMultiplier="1.2"
+android:paddingTop="4dp"
+android:paddingBottom="6dp"
+app:layout_constraintTop_toTopOf="@id/tvEventTimeLabel"
+app:layout_constraintStart_toEndOf="@id/tvEventTimeLabel"
+app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

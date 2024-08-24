@@ -1,8 +1,10 @@
 package com.example.keepy.app.activity.kindergartenScreens;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,11 +66,12 @@ public class HomeFragment extends Fragment {
         ImageView ivHistory = view.findViewById(R.id.ivHistory);
         ImageView ivChildren = view.findViewById(R.id.ivChildren);
         ImageView ivCameraPic = view.findViewById(R.id.ivCameraPic);
-        ImageView ivFlower = view.findViewById(R.id.ivFlower);
-        TextView   tvGoToAllKindergartenScreen = view.findViewById(R.id.tvGoToAllKindergartenScreen);
+       // ImageView ivFlower = view.findViewById(R.id.ivFlower);
+        CardView tvGoToAllKindergartenScreen = view.findViewById(R.id.tvGoToAllKindergartenScreen);
 
         // Set the dynamic values for the TextViews
-        tvKindergartenName.setText(kindergartenName); // Display the kindergarten name
+        String welcomeMessage = getString(R.string.welcome_kindergarten, kindergartenName);
+        tvKindergartenName.setText(welcomeMessage);
 
         // Fetch the full name from Firebase
         fetchFullName(tvUsername);
@@ -133,11 +136,12 @@ public class HomeFragment extends Fragment {
 
     private void fetchFullName(final TextView tvUsername) {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     String fullName = dataSnapshot.child("fullName").getValue(String.class);
-                    tvUsername.setText(fullName); // Set the full name in the TextView
+                    tvUsername.setText(fullName + ","); // Set the full name in the TextView
                 } else {
                     tvUsername.setText("User not found"); // Handle case where user is not found
                 }

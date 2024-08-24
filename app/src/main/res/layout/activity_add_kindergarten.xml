@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/background"
+    android:background="@color/background_color"
     tools:context=".app.activity.homePageScreen.AddKindergartenActivity">
 
     <androidx.cardview.widget.CardView
@@ -31,7 +31,7 @@
                 android:id="@+id/addKindergarten"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="serif"
+                android:fontFamily="@font/chewy"
                 android:text="@string/add_a_new_kindergarten"
                 android:textAlignment="center"
                 android:textColor="@color/colorRegister"
@@ -50,7 +50,7 @@
                 android:hint="@string/the_name_of_kindergarten"
                 android:textStyle="bold"
                 android:textSize="17sp"
-                android:fontFamily="casual"
+                android:fontFamily="@font/chewy"
                 android:padding="10dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background"
@@ -67,7 +67,7 @@
                 android:drawablePadding="8dp"
                 android:textSize="17sp"
                 android:hint="@string/password"
-                android:fontFamily="casual"
+                android:fontFamily="@font/chewy"
                 android:textStyle="bold"
                 android:inputType="textPassword"
                 android:padding="8dp"
@@ -83,7 +83,7 @@
                 android:text="@string/add"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:fontFamily="casual"
+                android:fontFamily="@font/chewy"
                 android:textSize="18sp"
                 app:cornerRadius="20dp" />
 
@@ -95,7 +95,7 @@
                 android:layout_gravity="center"
                 android:text="Go to home page"
                 android:textStyle="bold"
-                android:fontFamily="casual"
+                android:fontFamily="@font/chewy"
                 android:textColor="@color/colorRegister"
                 tools:ignore="RtlHardcoded" />
 

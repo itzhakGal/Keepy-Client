@@ -6,11 +6,8 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,23 +27,23 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 
 public class SoundFragment extends Fragment {
 
     private String currentUserPhoneNumber;
     private String kindergartenName;
     private MediaPlayer mediaPlayer;
-    private ImageButton btnPlayStop;
+    private ImageButton btnPlayStop, btnRewind, btnPrevious, btnNext, btnFastForward;
     private SeekBar sbSound;
-    private Spinner spinnerMoreEvents;
     private LineBarVisualizer lineBarVisualizer;
     private Handler handler = new Handler();
     private Runnable updateSeekBar;
     private List<String> eventKeysList = new ArrayList<>();
     private Map<String, DataSnapshot> eventsMap = new HashMap<>();
+    private int currentEventIndex = -1;
 
     public SoundFragment() {
         // Required empty public constructor
@@ -71,8 +68,7 @@ public class SoundFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sounds, container, false);
 
@@ -81,24 +77,30 @@ public class SoundFragment extends Fragment {
         TextView tvEventTimeValue = view.findViewById(R.id.tvEventTimeValue);
         TextView tvEventDetail = view.findViewById(R.id.tvEventDetailSound);
         btnPlayStop = view.findViewById(R.id.btnPlayStop);
+        btnRewind = view.findViewById(R.id.btnRewind);
+        btnPrevious = view.findViewById(R.id.btnPrevious);
+        btnNext = view.findViewById(R.id.btnNext);
+        btnFastForward = view.findViewById(R.id.btnFastForward);
         sbSound = view.findViewById(R.id.sbSound);
-        spinnerMoreEvents = view.findViewById(R.id.spinnerMoreEvents);
         lineBarVisualizer = view.findViewById(R.id.visualizerLineBar);
 
+        // Set up the buttons for skipping/rewinding/fast-forwarding
+        setupButtonListeners(tvEventTypeValue, tvEventTimeValue, tvEventDetail);
+
         // Fetch all events from Firebase
-        fetchAllEvents(tvEventTypeValue, tvEventTimeValue, tvEventDetail);
+        fetchEventDetails(tvEventTypeValue, tvEventTimeValue, tvEventDetail);
 
         return view;
     }
 
-    private void fetchAllEvents(TextView tvEventTypeValue, TextView tvEventTimeValue, TextView tvEventDetail) {
+    private void fetchEventDetails(TextView tvEventTypeValue, TextView tvEventTimeValue, TextView tvEventDetail) {
         DatabaseReference eventsRef = FirebaseDatabase.getInstance().getReference("kindergartens/" + kindergartenName + "/events");
 
         eventsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                eventKeysList.clear();
                 eventsMap.clear();
+                eventKeysList.clear();
 
                 for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
                     String key = eventSnapshot.getKey();
@@ -106,27 +108,10 @@ public class SoundFragment extends Fragment {
                     eventsMap.put(key, eventSnapshot);
                 }
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, eventKeysList);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinnerMoreEvents.setAdapter(adapter);
-
-                spinnerMoreEvents.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        String selectedKey = eventKeysList.get(position);
-                        // Update the UI and audio based on the selected event
-                        displayEventDetails(selectedKey, tvEventTypeValue, tvEventTimeValue, tvEventDetail);
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-                        // Handle case where no item is selected if needed
-                    }
-                });
-
-                // Display the details of the latest event by default
-                if (!eventKeysList.isEmpty()) {
-                    displayEventDetails(eventKeysList.get(eventKeysList.size() - 1), tvEventTypeValue, tvEventTimeValue, tvEventDetail);
+                // Display the details of the first event by default
+                if (!eventsMap.isEmpty()) {
+                    currentEventIndex = 0;  // Start with the first event
+                    displayEventDetails(eventKeysList.get(currentEventIndex), tvEventTypeValue, tvEventTimeValue, tvEventDetail);
                 }
             }
 
@@ -145,7 +130,7 @@ public class SoundFragment extends Fragment {
             String audioFilePath = key + ".wav"; // Adjusted to match the .wav extension
 
             // Set the basic event type and time
-            tvEventTypeValue.setText(eventType);
+            tvEventTypeValue.setText(capitalize(eventType));
             tvEventTimeValue.setText(eventTime);
 
             // Handle event details based on the type
@@ -153,13 +138,14 @@ public class SoundFragment extends Fragment {
                 switch (eventType) {
                     case "curse word detected":
                         String word = eventSnapshot.child("word").getValue(String.class);
-                        tvEventDetail.setText("Word: " + word);
+                        tvEventDetail.setText("Word: " + capitalize(word));
                         break;
 
                     case "inappropriate sentence detected":
                         String sentence = eventSnapshot.child("sentence").getValue(String.class);
-                        tvEventDetail.setText("Sentence: " + sentence);
+                        tvEventDetail.setText("Sentence: " + capitalize(sentence));
                         break;
+
                     case "crying detected":
                         tvEventDetail.setText("Baby is crying");
                         break;
@@ -221,7 +207,7 @@ public class SoundFragment extends Fragment {
 
                         // Setting up the LineBarVisualizer
                         lineBarVisualizer.setColor(ContextCompat.getColor(getContext(), R.color.myColor));
-                        lineBarVisualizer.setDensity(40);
+                        lineBarVisualizer.setDensity(60);
                         lineBarVisualizer.setPlayer(mediaPlayer.getAudioSessionId());
 
                         // Start updating the SeekBar and visualizer
@@ -251,7 +237,6 @@ public class SoundFragment extends Fragment {
         }
     }
 
-
     private void startUpdatingSeekBar() {
         updateSeekBar = new Runnable() {
             @Override
@@ -264,12 +249,6 @@ public class SoundFragment extends Fragment {
             }
         };
         handler.post(updateSeekBar);
-    }
-
-    // Error display helper method
-    private void showError(String message) {
-        // Show an error message to the user
-        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
 
     private void playAudio() {
@@ -286,6 +265,54 @@ public class SoundFragment extends Fragment {
             sbSound.setProgress(0);
             handler.removeCallbacks(updateSeekBar);
         }
+    }
+
+    private void setupButtonListeners(TextView tvEventTypeValue, TextView tvEventTimeValue, TextView tvEventDetail) {
+        btnRewind.setOnClickListener(v -> rewindAudio());
+        btnFastForward.setOnClickListener(v -> fastForwardAudio());
+        btnPrevious.setOnClickListener(v -> playPrevious(tvEventTypeValue, tvEventTimeValue, tvEventDetail));
+        btnNext.setOnClickListener(v -> playNext(tvEventTypeValue, tvEventTimeValue, tvEventDetail));
+    }
+
+    private void rewindAudio() {
+        if (mediaPlayer != null) {
+            int currentPosition = mediaPlayer.getCurrentPosition();
+            mediaPlayer.seekTo(Math.max(currentPosition - 5000, 0)); // Rewind 5 seconds
+        }
+    }
+
+    private void fastForwardAudio() {
+        if (mediaPlayer != null) {
+            int currentPosition = mediaPlayer.getCurrentPosition();
+            mediaPlayer.seekTo(Math.min(currentPosition + 5000, mediaPlayer.getDuration())); // Fast-forward 5 seconds
+        }
+    }
+
+    private void playPrevious(TextView tvEventTypeValue, TextView tvEventTimeValue, TextView tvEventDetail) {
+        if (currentEventIndex > 0) {
+            currentEventIndex--;
+            displayEventDetails(eventKeysList.get(currentEventIndex), tvEventTypeValue, tvEventTimeValue, tvEventDetail);
+        } else {
+            showError("No previous events available");
+        }
+    }
+
+    private void playNext(TextView tvEventTypeValue, TextView tvEventTimeValue, TextView tvEventDetail) {
+        if (currentEventIndex < eventKeysList.size() - 1) {
+            currentEventIndex++;
+            displayEventDetails(eventKeysList.get(currentEventIndex), tvEventTypeValue, tvEventTimeValue, tvEventDetail);
+        } else {
+            showError("No next events available");
+        }
+    }
+
+    private void showError(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+    }
+
+    private String capitalize(String input) {
+        if (input == null || input.isEmpty()) return input;
+        return input.substring(0, 1).toUpperCase() + input.substring(1);
     }
 
     @Override

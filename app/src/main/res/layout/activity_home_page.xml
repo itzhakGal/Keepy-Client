@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:scrollbarSize="25dp"
     tools:context=".app.activity.homePageScreen.HomePageActivity"
-    android:background="@drawable/background">
+    android:background="@color/background_color">
 
     <LinearLayout
         android:id="@+id/linear_layout_container"
@@ -27,7 +27,7 @@
             android:id="@+id/textViewTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="serif"
+            android:fontFamily="@font/chewy"
             android:text="My Kindergartens"
             android:textAlignment="center"
             android:textColor="@color/colorRegister"
@@ -53,8 +53,8 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/custom_edittext"
             android:gravity="center"
-            android:padding="15sp"
-            android:fontFamily="casual"
+            android:padding="18dp"
+            android:fontFamily="@font/chewy"
             android:text="@string/no_kindergartens_available"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:cacheColorHint="#877760"
             android:visibility="gone"
-            android:fontFamily="casual"
+            android:fontFamily="@font/chewy"
             android:textStyle="bold"/>
 
         <TextView
@@ -76,8 +76,8 @@
             android:padding="18sp"
             android:text="+Add Kindergarten"
             android:textColor="@color/colorRegister"
-            android:textSize="16sp"
-            android:fontFamily="casual"
+            android:textSize="18sp"
+            android:fontFamily="@font/chewy"
             android:textStyle="bold"
             tools:ignore="RtlHardcoded" />
     <LinearLayout
@@ -90,7 +90,7 @@
             android:id="@+id/imageView3"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:padding="10sp"
+            android:padding="5sp"
             android:scaleType="centerCrop"
             android:visibility="visible"
             app:shapeAppearanceOverlay="@style/RoundedCornersImageView"
@@ -99,10 +99,11 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageView4"
             android:layout_width="200dp"
-            android:layout_height="181dp"
+            android:layout_height="200dp"
+            android:padding="5sp"
+            android:scaleType="centerCrop"
             app:shapeAppearanceOverlay="@style/RoundedCornersImageView"
-            app:srcCompat="@drawable/kindergarten9"
-            android:scaleType="centerCrop" />
+            app:srcCompat="@drawable/kindergarten9" />
 
     </LinearLayout>
 
@@ -110,10 +111,14 @@
             android:id="@+id/logoutButton"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:drawableTint="#7C5B5B"
-            android:fontFamily="@font/actor"
-            android:text="Log out"
-            android:textStyle="bold" />
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/colorRegister"
+            android:text="Logout"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:fontFamily="@font/chewy"
+            android:textSize="18sp"
+            app:cornerRadius="10dp" />
 
     </LinearLayout>
 
