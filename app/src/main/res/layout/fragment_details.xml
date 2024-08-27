@@ -61,7 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Kids"
+                    android:text="Children"
                     android:textColor="@color/myColor"
                     android:fontFamily="@font/chewy"
                     android:letterSpacing="0.05"

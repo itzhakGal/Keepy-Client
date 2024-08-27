@@ -33,47 +33,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
     }
 
-/*
-    private void sendNotification(String title, String messageBody, Map<String, String> data) {
-        Intent intent = new Intent(this, AlertDetailsActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-
-        // Add data payload to the intent
-        for (Map.Entry<String, String> entry : data.entrySet()) {
-            intent.putExtra(entry.getKey(), entry.getValue());
-        }
-
-        // Ensure the intent is unique by setting a unique action
-        intent.setAction(Long.toString(System.currentTimeMillis()));
-
-        int requestCode = (int) System.currentTimeMillis();
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-
-        String channelId = getString(R.string.default_notification_channel_id);
-        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder =
-                new NotificationCompat.Builder(this, channelId)
-                        .setSmallIcon(R.mipmap.ic_launcher)
-                        .setContentTitle(title)
-                        .setContentText(messageBody)
-                        .setAutoCancel(true)
-                        .setSound(defaultSoundUri)
-                        .setContentIntent(pendingIntent);
-
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-        // Since Android Oreo notification channel is needed.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(channelId,
-                    "Channel human readable title",
-                    NotificationManager.IMPORTANCE_DEFAULT);
-            notificationManager.createNotificationChannel(channel);
-        }
-
-        notificationManager.notify(0, notificationBuilder.build());
-    }*/
-
 
 
     private void sendNotification(String title, String messageBody, Map<String, String> data) {

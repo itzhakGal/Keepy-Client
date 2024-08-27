@@ -17,7 +17,7 @@ firebaseDatabase = "20.3.1"
 firebaseAuth = "23.0.0"
 googleGmsGoogleServices = "4.4.2"
 firebaseFirestore = "25.0.0"
-firebaseMessaging = "24.0.0"
+firebaseMessaging = "24.0.1"
 visualizer = "0.9.3"
 firebaseStorage = "21.0.0"
 

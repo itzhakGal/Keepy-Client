@@ -66,7 +66,6 @@ public class HomeFragment extends Fragment {
         ImageView ivHistory = view.findViewById(R.id.ivHistory);
         ImageView ivChildren = view.findViewById(R.id.ivChildren);
         ImageView ivCameraPic = view.findViewById(R.id.ivCameraPic);
-       // ImageView ivFlower = view.findViewById(R.id.ivFlower);
         CardView tvGoToAllKindergartenScreen = view.findViewById(R.id.tvGoToAllKindergartenScreen);
 
         // Set the dynamic values for the TextViews
@@ -141,6 +140,24 @@ public class HomeFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     String fullName = dataSnapshot.child("fullName").getValue(String.class);
+
+                    // Capitalize the first letter of each word
+                    if (fullName != null && !fullName.isEmpty()) {
+                        StringBuilder capitalizedFullName = new StringBuilder();
+                        String[] words = fullName.split("\\s+");
+
+                        for (String word : words) {
+                            if (!word.isEmpty()) {
+                                capitalizedFullName.append(Character.toUpperCase(word.charAt(0)))
+                                        .append(word.substring(1).toLowerCase())
+                                        .append(" ");
+                            }
+                        }
+
+                        // Remove the last extra space
+                        fullName = capitalizedFullName.toString().trim();
+                    }
+
                     tvUsername.setText(fullName + ","); // Set the full name in the TextView
                 } else {
                     tvUsername.setText("User not found"); // Handle case where user is not found

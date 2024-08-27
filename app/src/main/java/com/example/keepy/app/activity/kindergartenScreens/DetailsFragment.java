@@ -13,6 +13,11 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.keepy.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class DetailsFragment extends Fragment {
 
@@ -163,40 +168,58 @@ public class DetailsFragment extends Fragment {
     private void showRatingDetails() {
         toggleView(false);
 
-        // Set Rating
-        int rating = 4;
-        ratingBar.setRating(rating);
+        DatabaseReference reference = FirebaseDatabase.getInstance("https://keepyapp-e4d50-default-rtdb.europe-west1.firebasedatabase.app/")
+                .getReference("kindergartens")
+                .child(kindergartenName)
+                .child("weekly_positive_feedback")
+                .child("star_rating");
 
-        // Set additional description based on the rating
-        String additionalDescription = "";
-        switch (rating) {
-            case 0:
-                additionalDescription = "This week’s analysis shows that the level of encouragement and support was significantly below expectations. We recommend immediate attention to fostering a more positive environment for the children.";
-                break;
-            case 1:
-                additionalDescription = "The data indicates that there was very limited encouragement and support provided to the children this week. There's an opportunity to greatly improve in this area.";
-                break;
-            case 2:
-                additionalDescription = "This week’s feedback suggests that while some encouragement was provided, there is still considerable room for improvement in supporting the children more effectively.";
-                break;
-            case 3:
-                additionalDescription = "The level of encouragement and support provided to the children this week was average. Consistent positive reinforcement would further enhance their experience.";
-                break;
-            case 4:
-                additionalDescription = "This week’s data reflects a good level of encouragement and support for the children. Continuing to build on these strengths could lead to even better outcomes.";
-                break;
-            case 5:
-                additionalDescription = "Excellent! The system shows that the children received a high level of encouragement and support this week. Keep up the great work in fostering a positive environment!";
-                break;
-            default:
-                additionalDescription = "No rating available.";
-                break;
-        }
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
 
-        // Display the additional description below the RatingBar
-        ratingDescription.setText(additionalDescription);
+                    int rating = dataSnapshot.getValue(Integer.class);
+
+                    ratingBar.setRating(rating);
+
+                    String additionalDescription = "";
+                    switch (rating) {
+                        case 0:
+                            additionalDescription = "This week’s analysis shows that the level of encouragement and support was significantly below expectations. We recommend immediate attention to fostering a more positive environment for the children.";
+                            break;
+                        case 1:
+                            additionalDescription = "The data indicates that there was very limited encouragement and support provided to the children this week. There's an opportunity to greatly improve in this area.";
+                            break;
+                        case 2:
+                            additionalDescription = "This week’s feedback suggests that while some encouragement was provided, there is still considerable room for improvement in supporting the children more effectively.";
+                            break;
+                        case 3:
+                            additionalDescription = "The level of encouragement and support provided to the children this week was average. Consistent positive reinforcement would further enhance their experience.";
+                            break;
+                        case 4:
+                            additionalDescription = "This week’s data reflects a good level of encouragement and support for the children. Continuing to build on these strengths could lead to even better outcomes.";
+                            break;
+                        case 5:
+                            additionalDescription = "Excellent! The system shows that the children received a high level of encouragement and support this week. Keep up the great work in fostering a positive environment!";
+                            break;
+                        default:
+                            additionalDescription = "No rating available.";
+                            break;
+                    }
+
+                    ratingDescription.setText(additionalDescription);
+                } else {
+                    ratingDescription.setText("No rating available.");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                ratingDescription.setText("Failed to load rating.");
+            }
+        });
     }
-
 
     // Helper method to switch between Table and Rating view
     private void toggleView(boolean showTable) {

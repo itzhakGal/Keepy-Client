@@ -31,7 +31,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-
 public class HomePageActivity extends AppCompatActivity {
 
     TextView textAddKindergarten;
@@ -74,7 +73,8 @@ public class HomePageActivity extends AppCompatActivity {
                 ArrayList<String> kindergartenNames = new ArrayList<>();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String kindergartenName = snapshot.child("kindergartenName").getValue(String.class);
-                    kindergartenNames.add(kindergartenName);
+                    assert kindergartenName != null;
+                    kindergartenNames.add(kindergartenName.toUpperCase());
                 }
                 if (kindergartenNames.isEmpty()) {
                     kindergartenTextView.setVisibility(View.VISIBLE);

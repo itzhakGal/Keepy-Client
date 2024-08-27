@@ -46,9 +46,7 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.legacy.support.v4)
     implementation(libs.firebase.database)
-    implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
-    implementation(libs.firebase.messaging)
 
     implementation ("com.google.android.material:material:1.5.0")
     implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
@@ -62,6 +60,8 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.9.2")
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.2")
     implementation(libs.firebase.storage)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.messaging)
 
     // Testing dependencies
     testImplementation(libs.junit)
