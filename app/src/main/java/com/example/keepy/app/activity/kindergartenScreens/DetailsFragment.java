@@ -1,5 +1,14 @@
 package com.example.keepy.app.activity.kindergartenScreens;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +19,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.keepy.R;
@@ -74,7 +84,7 @@ public class DetailsFragment extends Fragment {
         iconKids.setOnClickListener(v -> showKidsDetails());
         iconParents.setOnClickListener(v -> showParentsDetails());
         iconKindergarten.setOnClickListener(v -> showStaffDetails());
-        iconAdditionalDetails.setOnClickListener(v -> showRatingDetails());
+        iconAdditionalDetails.setOnClickListener(v -> showRatingDetails(4));  // Change the rating value to test different scenarios
 
         // Default view
         showKidsDetails();
@@ -165,6 +175,7 @@ public class DetailsFragment extends Fragment {
         addDataRow("7", "Anna Thompson", "Assistant", "050-012-3456");
     }
 
+/*
     private void showRatingDetails() {
         toggleView(false);
 
@@ -179,7 +190,7 @@ public class DetailsFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
 
-                    int rating = dataSnapshot.getValue(Integer.class);
+                    int rating = 2;
 
                     ratingBar.setRating(rating);
 
@@ -220,6 +231,78 @@ public class DetailsFragment extends Fragment {
             }
         });
     }
+*/
+
+
+    private void showRatingDetails(int rating) {
+        toggleView(false);
+
+        // Set the rating bar to the provided rating
+        ratingBar.setRating(rating);
+
+        // Prepare the appropriate description based on the rating value
+        String additionalDescription = "";
+        switch (rating) {
+            case 0:
+                additionalDescription = "This week’s analysis shows that the level of encouragement and support was significantly below expectations. We recommend immediate attention to fostering a more positive environment for the children.";
+                break;
+            case 1:
+                additionalDescription = "The data indicates that there was very limited encouragement and support provided to the children this week. There's an opportunity to greatly improve in this area.";
+                break;
+            case 2:
+                additionalDescription = "This week’s feedback suggests that while some encouragement was provided, there is still considerable room for improvement in supporting the children more effectively.";
+                break;
+            case 3:
+                additionalDescription = "The level of encouragement and support provided to the children this week was average. Consistent positive reinforcement would further enhance their experience.";
+                break;
+            case 4:
+                additionalDescription = "This week’s data reflects a good level of encouragement and support for the children. Continuing to build on these strengths could lead to even better outcomes.";
+                break;
+            case 5:
+                additionalDescription = "Excellent! The system shows that the children received a high level of encouragement and support this week. Keep up the great work in fostering a positive environment!";
+                sendPositiveReinforcementNotification();  // Send a notification for rating 5
+                break;
+            default:
+                additionalDescription = "No rating available.";
+                break;
+        }
+
+        // Set the description text
+        ratingDescription.setText(additionalDescription);
+    }
+
+    private void sendPositiveReinforcementNotification() {
+        String channelId = "positive_reinforcement_channel";
+        String channelName = "Positive Reinforcement Notifications";
+        String message = "Positive reinforcement benefits everyone. Take a moment to send an encouraging message to the kindergarten team!";
+
+        NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+
+        // Create the notification channel for Android O and above
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        // Prepare the image to be used in the notification
+        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.stars);  // Replace with your image
+
+        // Build the notification with BigTextStyle to ensure all text is visible
+        Notification notification = new NotificationCompat.Builder(getActivity(), channelId)
+                .setSmallIcon(R.drawable.ic_notification)
+                .setLargeIcon(largeIcon)
+                .setContentTitle("Positive Reinforcement")
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(message))  // Ensure the full message is displayed
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .build();
+
+        // Send the notification
+        notificationManager.notify(1, notification);
+    }
+
+
+
 
     // Helper method to switch between Table and Rating view
     private void toggleView(boolean showTable) {

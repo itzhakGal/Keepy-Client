@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,9 +28,9 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
 public class SoundFragment extends Fragment {
 
@@ -44,6 +45,13 @@ public class SoundFragment extends Fragment {
     private List<String> eventKeysList = new ArrayList<>();
     private Map<String, DataSnapshot> eventsMap = new HashMap<>();
     private int currentEventIndex = -1;
+
+    private int[] eventImages = {
+            R.drawable.sound1,
+            R.drawable.sound2,
+            R.drawable.sound3,
+            R.drawable.sound4
+    };
 
     public SoundFragment() {
         // Required empty public constructor
@@ -153,6 +161,10 @@ public class SoundFragment extends Fragment {
                     // Add other cases here if there are other event types
                 }
             }
+
+            // Set the image based on the current event index
+            ImageView ivEventImage = getView().findViewById(R.id.ivEventImage);
+            ivEventImage.setImageResource(eventImages[currentEventIndex % eventImages.length]);
 
             // Stop and release previous MediaPlayer if exists
             if (mediaPlayer != null) {
@@ -327,4 +339,13 @@ public class SoundFragment extends Fragment {
             lineBarVisualizer.release();
         }
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            stopAudio();
+        }
+    }
+
 }

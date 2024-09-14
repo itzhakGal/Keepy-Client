@@ -42,7 +42,7 @@ public class AddKindergartenActivity extends AppCompatActivity {
         kindergartenPasswordET = findViewById(R.id.Password);
         addKindergartenButton = findViewById(R.id.addKindergartenButton);
         textGoToHomePage = findViewById(R.id.textGoToHomePage);
-        //createTestData();
+       // createTestData();
         Intent intent = getIntent();
         currentUserPhoneNumber = intent.getStringExtra("currentUserPhoneNumber");
         databaseReference = FirebaseDatabase.getInstance("https://keepyapp-e4d50-default-rtdb.europe-west1.firebasedatabase.app/")
@@ -96,6 +96,18 @@ public class AddKindergartenActivity extends AppCompatActivity {
         // Inserting the third kindergarten data
         KindergartenDetailsHelperClass taliKindergarten = new KindergartenDetailsHelperClass("tali", "33333");
         reference.child("tali").setValue(taliKindergarten);
+
+        KindergartenDetailsHelperClass rotemKindergarten = new KindergartenDetailsHelperClass("Rotem", "ISUnkBJM");
+        reference.child("Rotem").setValue(rotemKindergarten);
+
+    }
+    private void createTestDataRotem() {
+        DatabaseReference reference = FirebaseDatabase.getInstance("https://keepyapp-e4d50-default-rtdb.europe-west1.firebasedatabase.app/").getReference("kindergartens");
+
+        // Inserting the first kindergarten data
+        KindergartenDetailsHelperClass rotemKindergarten = new KindergartenDetailsHelperClass("Rotem", "ISUnkBJM");
+        reference.child("Rotem").setValue(rotemKindergarten);
+
     }
 
     public void checkDetails() {

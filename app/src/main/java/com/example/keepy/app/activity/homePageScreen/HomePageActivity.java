@@ -1,6 +1,5 @@
 package com.example.keepy.app.activity.homePageScreen;
 
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,16 +17,14 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.keepy.R;
-
 import com.example.keepy.app.activity.kindergartenScreens.MainActivity;
-import com.google.firebase.FirebaseApp;
 import com.example.keepy.app.activity.RegisterActivity;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 
 import java.util.ArrayList;
 
@@ -71,11 +68,15 @@ public class HomePageActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<String> kindergartenNames = new ArrayList<>();
+                final ArrayList<String> originalKindergartenNames = new ArrayList<>();
+
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String kindergartenName = snapshot.child("kindergartenName").getValue(String.class);
                     assert kindergartenName != null;
+                    originalKindergartenNames.add(kindergartenName);
                     kindergartenNames.add(kindergartenName.toUpperCase());
                 }
+
                 if (kindergartenNames.isEmpty()) {
                     kindergartenTextView.setVisibility(View.VISIBLE);
                 } else {
@@ -85,6 +86,18 @@ public class HomePageActivity extends AppCompatActivity {
                     kindergartenListView.setAdapter(adapter);
                     kindergartenListView.setVisibility(View.VISIBLE);
                 }
+
+                // Set click listener for the ListView items
+                kindergartenListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        String selectedKindergarten = originalKindergartenNames.get(position);
+                        Intent intent = new Intent(HomePageActivity.this, MainActivity.class);
+                        intent.putExtra("kindergartenName", selectedKindergarten);
+                        intent.putExtra("currentUserPhoneNumber", currentUserPhoneNumber);
+                        startActivity(intent);
+                    }
+                });
             }
 
             @Override
@@ -102,20 +115,6 @@ public class HomePageActivity extends AppCompatActivity {
             }
         });
 
-        // Set click listener for the ListView items
-        kindergartenListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String selectedKindergarten = (String) parent.getItemAtPosition(position);
-
-                // Start MainActivity and pass selected kindergarten name and user phone number
-                Intent intent = new Intent(HomePageActivity.this, MainActivity.class);
-                intent.putExtra("kindergartenName", selectedKindergarten);
-                intent.putExtra("currentUserPhoneNumber", currentUserPhoneNumber);
-                startActivity(intent);
-            }
-        });
-
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,7 +122,7 @@ public class HomePageActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("remember", "false");
                 editor.apply();
-                        Intent intent = new Intent(HomePageActivity.this, RegisterActivity.class);
+                Intent intent = new Intent(HomePageActivity.this, RegisterActivity.class);
                 startActivity(intent);
                 finish();
             }
