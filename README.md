@@ -22,7 +22,7 @@ The **Client** repository is part of the **Keepy** system, which detects unusual
 ### Steps:
 1. Clone the repository:
    ```bash
-   git clone https://github.com/YourOrganization/Client.git
+   git clone https://github.com/itzhakGal/Keepy-Client.git
 
 ---
 
