@@ -1,7 +1,22 @@
 # 🎧 Keepy - Client 🎧
 
 ### 📝 Overview
-The **Client** repository is part of the **Keepy** system, which detects unusual noises in kindergartens to ensure children's safety. The client-side handles the user interface and interaction for parents and teachers to view alerts and manage settings.
+The **Keepy - Client** repository contains the Android application for the **Keepy** system, designed to detect unusual noises in kindergartens and notify parents and teachers in real-time. This app provides a user-friendly interface for receiving alerts, managing kindergarten information, and accessing historical data.
+
+---
+
+## 📱 Application Screenshots
+
+Here are some screenshots from the **Keepy** Android app:
+
+![Home Screen](screenshots/home_screen.jpg)
+*Home screen where users can view alerts and manage settings.*
+
+![Alerts History](screenshots/alerts_history.jpg)
+*Alerts history with options to listen to recorded audio.*
+
+![Details Screen](screenshots/details.jpg)
+*Detailed view of children details in the kindergarten.*
 
 ---
 
@@ -23,6 +38,7 @@ The **Client** repository is part of the **Keepy** system, which detects unusual
 1. Clone the repository:
    ```bash
    git clone https://github.com/itzhakGal/Keepy-Client.git
+
 
 ---
 
