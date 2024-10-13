@@ -9,13 +9,16 @@ The **Keepy - Client** repository contains the Android application for the **Kee
 
 Here are some screenshots from the **Keepy** Android app:
 
-![Home Screen](screenshots/home_screen.jpg)
+<img src="screenshots/home_screen.jpg" alt="Home Screen" width="300"/>
+
 *Home screen where users can view alerts and manage settings.*
 
-![Alerts History](screenshots/alerts_history.jpg)
+<img src="screenshots/alerts_history.jpg" alt="Alerts History" width="300"/>
+
 *Alerts history with options to listen to recorded audio.*
 
-![Details Screen](screenshots/details.jpg)
+<img src="screenshots/details.jpg" alt="Details Screen" width="300"/>
+
 *Detailed view of children details in the kindergarten.*
 
 ---
